@@ -89,12 +89,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files\boost;C:\Program Files\boost\stage\lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost;C:\Program Files\boost\stage\lib;C:\Users\garden\Documents\Visual Studio 2015\Projects\DNA_IO_Server\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\boost;C:\Program Files\boost\stage\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\boost;C:\Program Files\boost\stage\lib;C:\Users\garden\Documents\Visual Studio 2015\Projects\DNA_IO_Server\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,10 +106,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files\boost;C:\Program Files\boost\stage\lib;C:\Users\garden\Downloads\protobuf-3.1.0\install\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,14 +152,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Channel.cpp" />
+    <ClCompile Include="Login_server.cpp" />
     <ClCompile Include="Main_server.cpp" />
+    <ClCompile Include="PB_handler.cpp" />
     <ClCompile Include="protocol.pb.cc" />
+    <ClCompile Include="Session.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="protocol.proto" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Channel.h" />
+    <ClInclude Include="Game_server.h" />
+    <ClInclude Include="Login_server.h" />
+    <ClInclude Include="PB_handler.h" />
     <ClInclude Include="protocol.pb.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="Settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

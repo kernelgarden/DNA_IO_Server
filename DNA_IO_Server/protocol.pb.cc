@@ -17,8 +17,13 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace dna_info {
+
 namespace {
 
+const ::google::protobuf::Descriptor* PacketHeader_PB_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PacketHeader_PB_reflection_ = NULL;
 const ::google::protobuf::Descriptor* LoginRequest_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   LoginRequest_reflection_ = NULL;
@@ -37,6 +42,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* SyncInfo_C_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   SyncInfo_C_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* packet_type_descriptor_ = NULL;
 
 }  // namespace
 
@@ -48,7 +54,22 @@ void protobuf_AssignDesc_protocol_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "protocol.proto");
   GOOGLE_CHECK(file != NULL);
-  LoginRequest_descriptor_ = file->message_type(0);
+  PacketHeader_PB_descriptor_ = file->message_type(0);
+  static const int PacketHeader_PB_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PacketHeader_PB, packet_size_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PacketHeader_PB, packet_type_),
+  };
+  PacketHeader_PB_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      PacketHeader_PB_descriptor_,
+      PacketHeader_PB::internal_default_instance(),
+      PacketHeader_PB_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(PacketHeader_PB),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PacketHeader_PB, _internal_metadata_));
+  LoginRequest_descriptor_ = file->message_type(1);
   static const int LoginRequest_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginRequest, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginRequest, passwd_),
@@ -63,7 +84,7 @@ void protobuf_AssignDesc_protocol_2eproto() {
       -1,
       sizeof(LoginRequest),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginRequest, _internal_metadata_));
-  LoginResponse_descriptor_ = file->message_type(1);
+  LoginResponse_descriptor_ = file->message_type(2);
   static const int LoginResponse_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginResponse, response_code_),
   };
@@ -77,7 +98,7 @@ void protobuf_AssignDesc_protocol_2eproto() {
       -1,
       sizeof(LoginResponse),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoginResponse, _internal_metadata_));
-  UserInfo_descriptor_ = file->message_type(2);
+  UserInfo_descriptor_ = file->message_type(3);
   static const int UserInfo_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserInfo, identify_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserInfo, channel_num_),
@@ -93,7 +114,7 @@ void protobuf_AssignDesc_protocol_2eproto() {
       -1,
       sizeof(UserInfo),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserInfo, _internal_metadata_));
-  SyncInfo_S_descriptor_ = file->message_type(3);
+  SyncInfo_S_descriptor_ = file->message_type(4);
   static const int SyncInfo_S_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SyncInfo_S, users_),
   };
@@ -128,7 +149,7 @@ void protobuf_AssignDesc_protocol_2eproto() {
       -1,
       sizeof(SyncInfo_S_User),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SyncInfo_S_User, _internal_metadata_));
-  SyncInfo_C_descriptor_ = file->message_type(4);
+  SyncInfo_C_descriptor_ = file->message_type(5);
   static const int SyncInfo_C_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SyncInfo_C, user_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SyncInfo_C, x_pos_),
@@ -149,6 +170,7 @@ void protobuf_AssignDesc_protocol_2eproto() {
       -1,
       sizeof(SyncInfo_C),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SyncInfo_C, _internal_metadata_));
+  packet_type_descriptor_ = file->enum_type(0);
 }
 
 namespace {
@@ -162,6 +184,8 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      PacketHeader_PB_descriptor_, PacketHeader_PB::internal_default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       LoginRequest_descriptor_, LoginRequest::internal_default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -179,6 +203,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_protocol_2eproto() {
+  PacketHeader_PB_default_instance_.Shutdown();
+  delete PacketHeader_PB_reflection_;
   LoginRequest_default_instance_.Shutdown();
   delete LoginRequest_reflection_;
   LoginResponse_default_instance_.Shutdown();
@@ -196,6 +222,7 @@ void protobuf_ShutdownFile_protocol_2eproto() {
 void protobuf_InitDefaults_protocol_2eproto_impl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  PacketHeader_PB_default_instance_.DefaultConstruct();
   ::google::protobuf::internal::GetEmptyString();
   LoginRequest_default_instance_.DefaultConstruct();
   LoginResponse_default_instance_.DefaultConstruct();
@@ -203,6 +230,7 @@ void protobuf_InitDefaults_protocol_2eproto_impl() {
   SyncInfo_S_default_instance_.DefaultConstruct();
   SyncInfo_S_User_default_instance_.DefaultConstruct();
   SyncInfo_C_default_instance_.DefaultConstruct();
+  PacketHeader_PB_default_instance_.get_mutable()->InitAsDefaultInstance();
   LoginRequest_default_instance_.get_mutable()->InitAsDefaultInstance();
   LoginResponse_default_instance_.get_mutable()->InitAsDefaultInstance();
   UserInfo_default_instance_.get_mutable()->InitAsDefaultInstance();
@@ -221,20 +249,25 @@ void protobuf_AddDesc_protocol_2eproto_impl() {
 
   protobuf_InitDefaults_protocol_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\016protocol.proto\"*\n\014LoginRequest\022\n\n\002id\030\001"
-    " \001(\t\022\016\n\006passwd\030\002 \001(\t\"&\n\rLoginResponse\022\025\n"
-    "\rresponse_code\030\001 \001(\005\"I\n\010UserInfo\022\023\n\013iden"
-    "tify_id\030\001 \001(\005\022\023\n\013channel_num\030\002 \001(\005\022\023\n\013se"
-    "ssion_num\030\003 \001(\005\"\274\001\n\nSyncInfo_S\022\037\n\005users\030"
-    "\001 \003(\0132\020.SyncInfo_S.User\032\214\001\n\004User\022\017\n\007user"
+    "\n\016protocol.proto\022\010dna_info\";\n\017PacketHead"
+    "er_PB\022\023\n\013packet_size\030\001 \001(\r\022\023\n\013packet_typ"
+    "e\030\002 \001(\005\"*\n\014LoginRequest\022\n\n\002id\030\002 \001(\t\022\016\n\006p"
+    "asswd\030\003 \001(\t\"&\n\rLoginResponse\022\025\n\rresponse"
+    "_code\030\002 \001(\005\"I\n\010UserInfo\022\023\n\013identify_id\030\002"
+    " \001(\005\022\023\n\013channel_num\030\003 \001(\005\022\023\n\013session_num"
+    "\030\004 \001(\005\"\305\001\n\nSyncInfo_S\022(\n\005users\030\002 \003(\0132\031.d"
+    "na_info.SyncInfo_S.User\032\214\001\n\004User\022\017\n\007user"
     "_id\030\001 \001(\005\022\r\n\005x_pos\030\002 \001(\005\022\r\n\005y_pos\030\003 \001(\005\022"
     "\013\n\003vec\030\004 \001(\005\022\014\n\004type\030\005 \001(\005\022\022\n\nA_type_pow"
     "\030\006 \001(\005\022\022\n\nB_type_pow\030\007 \001(\005\022\022\n\nC_type_pow"
     "\030\010 \001(\005\"\222\001\n\nSyncInfo_C\022\017\n\007user_id\030\001 \001(\005\022\r"
     "\n\005x_pos\030\002 \001(\005\022\r\n\005y_pos\030\003 \001(\005\022\013\n\003vec\030\004 \001("
     "\005\022\014\n\004type\030\005 \001(\005\022\022\n\nA_type_pow\030\006 \001(\005\022\022\n\nB"
-    "_type_pow\030\007 \001(\005\022\022\n\nC_type_pow\030\010 \001(\005b\006pro"
-    "to3", 523);
+    "_type_pow\030\007 \001(\005\022\022\n\nC_type_pow\030\010 \001(\005*x\n\013p"
+    "acket_type\022\r\n\tLOGIN_REQ\020\000\022\r\n\tLOGIN_RES\020\001"
+    "\022\r\n\tUSER_INFO\020\002\022\017\n\013SYNC_INFO_S\020\003\022\017\n\013SYNC"
+    "_INFO_C\020\004\022\014\n\010CHAT_REQ\020\005\022\014\n\010CHAT_RES\020\006b\006p"
+    "roto3", 725);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protocol.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_protocol_2eproto);
@@ -251,6 +284,25 @@ struct StaticDescriptorInitializer_protocol_2eproto {
     protobuf_AddDesc_protocol_2eproto();
   }
 } static_descriptor_initializer_protocol_2eproto_;
+const ::google::protobuf::EnumDescriptor* packet_type_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return packet_type_descriptor_;
+}
+bool packet_type_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 namespace {
 
@@ -265,6 +317,322 @@ static void MergeFromFail(int line) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int PacketHeader_PB::kPacketSizeFieldNumber;
+const int PacketHeader_PB::kPacketTypeFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+PacketHeader_PB::PacketHeader_PB()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:dna_info.PacketHeader_PB)
+}
+
+void PacketHeader_PB::InitAsDefaultInstance() {
+}
+
+PacketHeader_PB::PacketHeader_PB(const PacketHeader_PB& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  UnsafeMergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:dna_info.PacketHeader_PB)
+}
+
+void PacketHeader_PB::SharedCtor() {
+  ::memset(&packet_size_, 0, reinterpret_cast<char*>(&packet_type_) -
+    reinterpret_cast<char*>(&packet_size_) + sizeof(packet_type_));
+  _cached_size_ = 0;
+}
+
+PacketHeader_PB::~PacketHeader_PB() {
+  // @@protoc_insertion_point(destructor:dna_info.PacketHeader_PB)
+  SharedDtor();
+}
+
+void PacketHeader_PB::SharedDtor() {
+}
+
+void PacketHeader_PB::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PacketHeader_PB::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PacketHeader_PB_descriptor_;
+}
+
+const PacketHeader_PB& PacketHeader_PB::default_instance() {
+  protobuf_InitDefaults_protocol_2eproto();
+  return *internal_default_instance();
+}
+
+::google::protobuf::internal::ExplicitlyConstructed<PacketHeader_PB> PacketHeader_PB_default_instance_;
+
+PacketHeader_PB* PacketHeader_PB::New(::google::protobuf::Arena* arena) const {
+  PacketHeader_PB* n = new PacketHeader_PB;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void PacketHeader_PB::Clear() {
+// @@protoc_insertion_point(message_clear_start:dna_info.PacketHeader_PB)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(PacketHeader_PB, f) \
+  _Pragma("clang diagnostic pop")
+#else
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<PacketHeader_PB*>(16)->f)
+#endif
+
+#define ZR_(first, last) do {\
+  ::memset(&(first), 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(packet_size_, packet_type_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+}
+
+bool PacketHeader_PB::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:dna_info.PacketHeader_PB)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 packet_size = 1;
+      case 1: {
+        if (tag == 8) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &packet_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_packet_type;
+        break;
+      }
+
+      // optional int32 packet_type = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_packet_type:
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &packet_type_)));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:dna_info.PacketHeader_PB)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:dna_info.PacketHeader_PB)
+  return false;
+#undef DO_
+}
+
+void PacketHeader_PB::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:dna_info.PacketHeader_PB)
+  // optional uint32 packet_size = 1;
+  if (this->packet_size() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->packet_size(), output);
+  }
+
+  // optional int32 packet_type = 2;
+  if (this->packet_type() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->packet_type(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:dna_info.PacketHeader_PB)
+}
+
+::google::protobuf::uint8* PacketHeader_PB::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.PacketHeader_PB)
+  // optional uint32 packet_size = 1;
+  if (this->packet_size() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->packet_size(), target);
+  }
+
+  // optional int32 packet_type = 2;
+  if (this->packet_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->packet_type(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.PacketHeader_PB)
+  return target;
+}
+
+size_t PacketHeader_PB::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:dna_info.PacketHeader_PB)
+  size_t total_size = 0;
+
+  // optional uint32 packet_size = 1;
+  if (this->packet_size() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->packet_size());
+  }
+
+  // optional int32 packet_type = 2;
+  if (this->packet_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->packet_type());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PacketHeader_PB::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.PacketHeader_PB)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const PacketHeader_PB* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const PacketHeader_PB>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.PacketHeader_PB)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.PacketHeader_PB)
+    UnsafeMergeFrom(*source);
+  }
+}
+
+void PacketHeader_PB::MergeFrom(const PacketHeader_PB& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.PacketHeader_PB)
+  if (GOOGLE_PREDICT_TRUE(&from != this)) {
+    UnsafeMergeFrom(from);
+  } else {
+    MergeFromFail(__LINE__);
+  }
+}
+
+void PacketHeader_PB::UnsafeMergeFrom(const PacketHeader_PB& from) {
+  GOOGLE_DCHECK(&from != this);
+  if (from.packet_size() != 0) {
+    set_packet_size(from.packet_size());
+  }
+  if (from.packet_type() != 0) {
+    set_packet_type(from.packet_type());
+  }
+}
+
+void PacketHeader_PB::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.PacketHeader_PB)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PacketHeader_PB::CopyFrom(const PacketHeader_PB& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.PacketHeader_PB)
+  if (&from == this) return;
+  Clear();
+  UnsafeMergeFrom(from);
+}
+
+bool PacketHeader_PB::IsInitialized() const {
+
+  return true;
+}
+
+void PacketHeader_PB::Swap(PacketHeader_PB* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void PacketHeader_PB::InternalSwap(PacketHeader_PB* other) {
+  std::swap(packet_size_, other->packet_size_);
+  std::swap(packet_type_, other->packet_type_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata PacketHeader_PB::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PacketHeader_PB_descriptor_;
+  metadata.reflection = PacketHeader_PB_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// PacketHeader_PB
+
+// optional uint32 packet_size = 1;
+void PacketHeader_PB::clear_packet_size() {
+  packet_size_ = 0u;
+}
+::google::protobuf::uint32 PacketHeader_PB::packet_size() const {
+  // @@protoc_insertion_point(field_get:dna_info.PacketHeader_PB.packet_size)
+  return packet_size_;
+}
+void PacketHeader_PB::set_packet_size(::google::protobuf::uint32 value) {
+  
+  packet_size_ = value;
+  // @@protoc_insertion_point(field_set:dna_info.PacketHeader_PB.packet_size)
+}
+
+// optional int32 packet_type = 2;
+void PacketHeader_PB::clear_packet_type() {
+  packet_type_ = 0;
+}
+::google::protobuf::int32 PacketHeader_PB::packet_type() const {
+  // @@protoc_insertion_point(field_get:dna_info.PacketHeader_PB.packet_type)
+  return packet_type_;
+}
+void PacketHeader_PB::set_packet_type(::google::protobuf::int32 value) {
+  
+  packet_type_ = value;
+  // @@protoc_insertion_point(field_set:dna_info.PacketHeader_PB.packet_type)
+}
+
+inline const PacketHeader_PB* PacketHeader_PB::internal_default_instance() {
+  return &PacketHeader_PB_default_instance_.get();
+}
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int LoginRequest::kIdFieldNumber;
 const int LoginRequest::kPasswdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -273,7 +641,7 @@ LoginRequest::LoginRequest()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
   SharedCtor();
-  // @@protoc_insertion_point(constructor:LoginRequest)
+  // @@protoc_insertion_point(constructor:dna_info.LoginRequest)
 }
 
 void LoginRequest::InitAsDefaultInstance() {
@@ -284,7 +652,7 @@ LoginRequest::LoginRequest(const LoginRequest& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   UnsafeMergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:LoginRequest)
+  // @@protoc_insertion_point(copy_constructor:dna_info.LoginRequest)
 }
 
 void LoginRequest::SharedCtor() {
@@ -294,7 +662,7 @@ void LoginRequest::SharedCtor() {
 }
 
 LoginRequest::~LoginRequest() {
-  // @@protoc_insertion_point(destructor:LoginRequest)
+  // @@protoc_insertion_point(destructor:dna_info.LoginRequest)
   SharedDtor();
 }
 
@@ -329,7 +697,7 @@ LoginRequest* LoginRequest::New(::google::protobuf::Arena* arena) const {
 }
 
 void LoginRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:LoginRequest)
+// @@protoc_insertion_point(message_clear_start:dna_info.LoginRequest)
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   passwd_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -338,38 +706,38 @@ bool LoginRequest::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:LoginRequest)
+  // @@protoc_insertion_point(parse_start:dna_info.LoginRequest)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string id = 1;
-      case 1: {
-        if (tag == 10) {
+      // optional string id = 2;
+      case 2: {
+        if (tag == 18) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_id()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->id().data(), this->id().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "LoginRequest.id"));
+            "dna_info.LoginRequest.id"));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_passwd;
+        if (input->ExpectTag(26)) goto parse_passwd;
         break;
       }
 
-      // optional string passwd = 2;
-      case 2: {
-        if (tag == 18) {
+      // optional string passwd = 3;
+      case 3: {
+        if (tag == 26) {
          parse_passwd:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_passwd()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->passwd().data(), this->passwd().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "LoginRequest.passwd"));
+            "dna_info.LoginRequest.passwd"));
         } else {
           goto handle_unusual;
         }
@@ -390,82 +758,82 @@ bool LoginRequest::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:LoginRequest)
+  // @@protoc_insertion_point(parse_success:dna_info.LoginRequest)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:LoginRequest)
+  // @@protoc_insertion_point(parse_failure:dna_info.LoginRequest)
   return false;
 #undef DO_
 }
 
 void LoginRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:LoginRequest)
-  // optional string id = 1;
+  // @@protoc_insertion_point(serialize_start:dna_info.LoginRequest)
+  // optional string id = 2;
   if (this->id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), this->id().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "LoginRequest.id");
+      "dna_info.LoginRequest.id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->id(), output);
+      2, this->id(), output);
   }
 
-  // optional string passwd = 2;
+  // optional string passwd = 3;
   if (this->passwd().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->passwd().data(), this->passwd().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "LoginRequest.passwd");
+      "dna_info.LoginRequest.passwd");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->passwd(), output);
+      3, this->passwd(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:LoginRequest)
+  // @@protoc_insertion_point(serialize_end:dna_info.LoginRequest)
 }
 
 ::google::protobuf::uint8* LoginRequest::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:LoginRequest)
-  // optional string id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.LoginRequest)
+  // optional string id = 2;
   if (this->id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), this->id().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "LoginRequest.id");
+      "dna_info.LoginRequest.id");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->id(), target);
+        2, this->id(), target);
   }
 
-  // optional string passwd = 2;
+  // optional string passwd = 3;
   if (this->passwd().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->passwd().data(), this->passwd().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "LoginRequest.passwd");
+      "dna_info.LoginRequest.passwd");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->passwd(), target);
+        3, this->passwd(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:LoginRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.LoginRequest)
   return target;
 }
 
 size_t LoginRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:LoginRequest)
+// @@protoc_insertion_point(message_byte_size_start:dna_info.LoginRequest)
   size_t total_size = 0;
 
-  // optional string id = 1;
+  // optional string id = 2;
   if (this->id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->id());
   }
 
-  // optional string passwd = 2;
+  // optional string passwd = 3;
   if (this->passwd().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -480,22 +848,22 @@ size_t LoginRequest::ByteSizeLong() const {
 }
 
 void LoginRequest::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:LoginRequest)
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.LoginRequest)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const LoginRequest* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const LoginRequest>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:LoginRequest)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.LoginRequest)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:LoginRequest)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.LoginRequest)
     UnsafeMergeFrom(*source);
   }
 }
 
 void LoginRequest::MergeFrom(const LoginRequest& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:LoginRequest)
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.LoginRequest)
   if (GOOGLE_PREDICT_TRUE(&from != this)) {
     UnsafeMergeFrom(from);
   } else {
@@ -516,14 +884,14 @@ void LoginRequest::UnsafeMergeFrom(const LoginRequest& from) {
 }
 
 void LoginRequest::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:LoginRequest)
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.LoginRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void LoginRequest::CopyFrom(const LoginRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:LoginRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.LoginRequest)
   if (&from == this) return;
   Clear();
   UnsafeMergeFrom(from);
@@ -556,37 +924,37 @@ void LoginRequest::InternalSwap(LoginRequest* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // LoginRequest
 
-// optional string id = 1;
+// optional string id = 2;
 void LoginRequest::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 const ::std::string& LoginRequest::id() const {
-  // @@protoc_insertion_point(field_get:LoginRequest.id)
+  // @@protoc_insertion_point(field_get:dna_info.LoginRequest.id)
   return id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 void LoginRequest::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:LoginRequest.id)
+  // @@protoc_insertion_point(field_set:dna_info.LoginRequest.id)
 }
 void LoginRequest::set_id(const char* value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:LoginRequest.id)
+  // @@protoc_insertion_point(field_set_char:dna_info.LoginRequest.id)
 }
 void LoginRequest::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:LoginRequest.id)
+  // @@protoc_insertion_point(field_set_pointer:dna_info.LoginRequest.id)
 }
 ::std::string* LoginRequest::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:LoginRequest.id)
+  // @@protoc_insertion_point(field_mutable:dna_info.LoginRequest.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 ::std::string* LoginRequest::release_id() {
-  // @@protoc_insertion_point(field_release:LoginRequest.id)
+  // @@protoc_insertion_point(field_release:dna_info.LoginRequest.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -597,40 +965,40 @@ void LoginRequest::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:LoginRequest.id)
+  // @@protoc_insertion_point(field_set_allocated:dna_info.LoginRequest.id)
 }
 
-// optional string passwd = 2;
+// optional string passwd = 3;
 void LoginRequest::clear_passwd() {
   passwd_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 const ::std::string& LoginRequest::passwd() const {
-  // @@protoc_insertion_point(field_get:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_get:dna_info.LoginRequest.passwd)
   return passwd_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 void LoginRequest::set_passwd(const ::std::string& value) {
   
   passwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set:dna_info.LoginRequest.passwd)
 }
 void LoginRequest::set_passwd(const char* value) {
   
   passwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set_char:dna_info.LoginRequest.passwd)
 }
 void LoginRequest::set_passwd(const char* value, size_t size) {
   
   passwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set_pointer:dna_info.LoginRequest.passwd)
 }
 ::std::string* LoginRequest::mutable_passwd() {
   
-  // @@protoc_insertion_point(field_mutable:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_mutable:dna_info.LoginRequest.passwd)
   return passwd_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 ::std::string* LoginRequest::release_passwd() {
-  // @@protoc_insertion_point(field_release:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_release:dna_info.LoginRequest.passwd)
   
   return passwd_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -641,7 +1009,7 @@ void LoginRequest::set_allocated_passwd(::std::string* passwd) {
     
   }
   passwd_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), passwd);
-  // @@protoc_insertion_point(field_set_allocated:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set_allocated:dna_info.LoginRequest.passwd)
 }
 
 inline const LoginRequest* LoginRequest::internal_default_instance() {
@@ -659,7 +1027,7 @@ LoginResponse::LoginResponse()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
   SharedCtor();
-  // @@protoc_insertion_point(constructor:LoginResponse)
+  // @@protoc_insertion_point(constructor:dna_info.LoginResponse)
 }
 
 void LoginResponse::InitAsDefaultInstance() {
@@ -670,7 +1038,7 @@ LoginResponse::LoginResponse(const LoginResponse& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   UnsafeMergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:LoginResponse)
+  // @@protoc_insertion_point(copy_constructor:dna_info.LoginResponse)
 }
 
 void LoginResponse::SharedCtor() {
@@ -679,7 +1047,7 @@ void LoginResponse::SharedCtor() {
 }
 
 LoginResponse::~LoginResponse() {
-  // @@protoc_insertion_point(destructor:LoginResponse)
+  // @@protoc_insertion_point(destructor:dna_info.LoginResponse)
   SharedDtor();
 }
 
@@ -712,7 +1080,7 @@ LoginResponse* LoginResponse::New(::google::protobuf::Arena* arena) const {
 }
 
 void LoginResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:LoginResponse)
+// @@protoc_insertion_point(message_clear_start:dna_info.LoginResponse)
   response_code_ = 0;
 }
 
@@ -720,15 +1088,15 @@ bool LoginResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:LoginResponse)
+  // @@protoc_insertion_point(parse_start:dna_info.LoginResponse)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 response_code = 1;
-      case 1: {
-        if (tag == 8) {
+      // optional int32 response_code = 2;
+      case 2: {
+        if (tag == 16) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -753,43 +1121,43 @@ bool LoginResponse::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:LoginResponse)
+  // @@protoc_insertion_point(parse_success:dna_info.LoginResponse)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:LoginResponse)
+  // @@protoc_insertion_point(parse_failure:dna_info.LoginResponse)
   return false;
 #undef DO_
 }
 
 void LoginResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:LoginResponse)
-  // optional int32 response_code = 1;
+  // @@protoc_insertion_point(serialize_start:dna_info.LoginResponse)
+  // optional int32 response_code = 2;
   if (this->response_code() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->response_code(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->response_code(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:LoginResponse)
+  // @@protoc_insertion_point(serialize_end:dna_info.LoginResponse)
 }
 
 ::google::protobuf::uint8* LoginResponse::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:LoginResponse)
-  // optional int32 response_code = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.LoginResponse)
+  // optional int32 response_code = 2;
   if (this->response_code() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->response_code(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->response_code(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:LoginResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.LoginResponse)
   return target;
 }
 
 size_t LoginResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:LoginResponse)
+// @@protoc_insertion_point(message_byte_size_start:dna_info.LoginResponse)
   size_t total_size = 0;
 
-  // optional int32 response_code = 1;
+  // optional int32 response_code = 2;
   if (this->response_code() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -804,22 +1172,22 @@ size_t LoginResponse::ByteSizeLong() const {
 }
 
 void LoginResponse::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:LoginResponse)
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.LoginResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const LoginResponse* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const LoginResponse>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:LoginResponse)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.LoginResponse)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:LoginResponse)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.LoginResponse)
     UnsafeMergeFrom(*source);
   }
 }
 
 void LoginResponse::MergeFrom(const LoginResponse& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:LoginResponse)
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.LoginResponse)
   if (GOOGLE_PREDICT_TRUE(&from != this)) {
     UnsafeMergeFrom(from);
   } else {
@@ -835,14 +1203,14 @@ void LoginResponse::UnsafeMergeFrom(const LoginResponse& from) {
 }
 
 void LoginResponse::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:LoginResponse)
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.LoginResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void LoginResponse::CopyFrom(const LoginResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:LoginResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.LoginResponse)
   if (&from == this) return;
   Clear();
   UnsafeMergeFrom(from);
@@ -874,18 +1242,18 @@ void LoginResponse::InternalSwap(LoginResponse* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // LoginResponse
 
-// optional int32 response_code = 1;
+// optional int32 response_code = 2;
 void LoginResponse::clear_response_code() {
   response_code_ = 0;
 }
 ::google::protobuf::int32 LoginResponse::response_code() const {
-  // @@protoc_insertion_point(field_get:LoginResponse.response_code)
+  // @@protoc_insertion_point(field_get:dna_info.LoginResponse.response_code)
   return response_code_;
 }
 void LoginResponse::set_response_code(::google::protobuf::int32 value) {
   
   response_code_ = value;
-  // @@protoc_insertion_point(field_set:LoginResponse.response_code)
+  // @@protoc_insertion_point(field_set:dna_info.LoginResponse.response_code)
 }
 
 inline const LoginResponse* LoginResponse::internal_default_instance() {
@@ -905,7 +1273,7 @@ UserInfo::UserInfo()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
   SharedCtor();
-  // @@protoc_insertion_point(constructor:UserInfo)
+  // @@protoc_insertion_point(constructor:dna_info.UserInfo)
 }
 
 void UserInfo::InitAsDefaultInstance() {
@@ -916,7 +1284,7 @@ UserInfo::UserInfo(const UserInfo& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   UnsafeMergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:UserInfo)
+  // @@protoc_insertion_point(copy_constructor:dna_info.UserInfo)
 }
 
 void UserInfo::SharedCtor() {
@@ -926,7 +1294,7 @@ void UserInfo::SharedCtor() {
 }
 
 UserInfo::~UserInfo() {
-  // @@protoc_insertion_point(destructor:UserInfo)
+  // @@protoc_insertion_point(destructor:dna_info.UserInfo)
   SharedDtor();
 }
 
@@ -959,7 +1327,7 @@ UserInfo* UserInfo::New(::google::protobuf::Arena* arena) const {
 }
 
 void UserInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:UserInfo)
+// @@protoc_insertion_point(message_clear_start:dna_info.UserInfo)
 #if defined(__clang__)
 #define ZR_HELPER_(f) \
   _Pragma("clang diagnostic push") \
@@ -987,15 +1355,15 @@ bool UserInfo::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:UserInfo)
+  // @@protoc_insertion_point(parse_start:dna_info.UserInfo)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 identify_id = 1;
-      case 1: {
-        if (tag == 8) {
+      // optional int32 identify_id = 2;
+      case 2: {
+        if (tag == 16) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1003,13 +1371,13 @@ bool UserInfo::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_channel_num;
+        if (input->ExpectTag(24)) goto parse_channel_num;
         break;
       }
 
-      // optional int32 channel_num = 2;
-      case 2: {
-        if (tag == 16) {
+      // optional int32 channel_num = 3;
+      case 3: {
+        if (tag == 24) {
          parse_channel_num:
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1018,13 +1386,13 @@ bool UserInfo::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(24)) goto parse_session_num;
+        if (input->ExpectTag(32)) goto parse_session_num;
         break;
       }
 
-      // optional int32 session_num = 3;
-      case 3: {
-        if (tag == 24) {
+      // optional int32 session_num = 4;
+      case 4: {
+        if (tag == 32) {
          parse_session_num:
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1050,77 +1418,77 @@ bool UserInfo::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:UserInfo)
+  // @@protoc_insertion_point(parse_success:dna_info.UserInfo)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:UserInfo)
+  // @@protoc_insertion_point(parse_failure:dna_info.UserInfo)
   return false;
 #undef DO_
 }
 
 void UserInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:UserInfo)
-  // optional int32 identify_id = 1;
+  // @@protoc_insertion_point(serialize_start:dna_info.UserInfo)
+  // optional int32 identify_id = 2;
   if (this->identify_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->identify_id(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->identify_id(), output);
   }
 
-  // optional int32 channel_num = 2;
+  // optional int32 channel_num = 3;
   if (this->channel_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->channel_num(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->channel_num(), output);
   }
 
-  // optional int32 session_num = 3;
+  // optional int32 session_num = 4;
   if (this->session_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->session_num(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->session_num(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:UserInfo)
+  // @@protoc_insertion_point(serialize_end:dna_info.UserInfo)
 }
 
 ::google::protobuf::uint8* UserInfo::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:UserInfo)
-  // optional int32 identify_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.UserInfo)
+  // optional int32 identify_id = 2;
   if (this->identify_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->identify_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->identify_id(), target);
   }
 
-  // optional int32 channel_num = 2;
+  // optional int32 channel_num = 3;
   if (this->channel_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->channel_num(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->channel_num(), target);
   }
 
-  // optional int32 session_num = 3;
+  // optional int32 session_num = 4;
   if (this->session_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->session_num(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->session_num(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:UserInfo)
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.UserInfo)
   return target;
 }
 
 size_t UserInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:UserInfo)
+// @@protoc_insertion_point(message_byte_size_start:dna_info.UserInfo)
   size_t total_size = 0;
 
-  // optional int32 identify_id = 1;
+  // optional int32 identify_id = 2;
   if (this->identify_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->identify_id());
   }
 
-  // optional int32 channel_num = 2;
+  // optional int32 channel_num = 3;
   if (this->channel_num() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->channel_num());
   }
 
-  // optional int32 session_num = 3;
+  // optional int32 session_num = 4;
   if (this->session_num() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -1135,22 +1503,22 @@ size_t UserInfo::ByteSizeLong() const {
 }
 
 void UserInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:UserInfo)
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.UserInfo)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const UserInfo* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const UserInfo>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:UserInfo)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.UserInfo)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:UserInfo)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.UserInfo)
     UnsafeMergeFrom(*source);
   }
 }
 
 void UserInfo::MergeFrom(const UserInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:UserInfo)
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.UserInfo)
   if (GOOGLE_PREDICT_TRUE(&from != this)) {
     UnsafeMergeFrom(from);
   } else {
@@ -1172,14 +1540,14 @@ void UserInfo::UnsafeMergeFrom(const UserInfo& from) {
 }
 
 void UserInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:UserInfo)
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.UserInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void UserInfo::CopyFrom(const UserInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:UserInfo)
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.UserInfo)
   if (&from == this) return;
   Clear();
   UnsafeMergeFrom(from);
@@ -1213,46 +1581,46 @@ void UserInfo::InternalSwap(UserInfo* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // UserInfo
 
-// optional int32 identify_id = 1;
+// optional int32 identify_id = 2;
 void UserInfo::clear_identify_id() {
   identify_id_ = 0;
 }
 ::google::protobuf::int32 UserInfo::identify_id() const {
-  // @@protoc_insertion_point(field_get:UserInfo.identify_id)
+  // @@protoc_insertion_point(field_get:dna_info.UserInfo.identify_id)
   return identify_id_;
 }
 void UserInfo::set_identify_id(::google::protobuf::int32 value) {
   
   identify_id_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.identify_id)
+  // @@protoc_insertion_point(field_set:dna_info.UserInfo.identify_id)
 }
 
-// optional int32 channel_num = 2;
+// optional int32 channel_num = 3;
 void UserInfo::clear_channel_num() {
   channel_num_ = 0;
 }
 ::google::protobuf::int32 UserInfo::channel_num() const {
-  // @@protoc_insertion_point(field_get:UserInfo.channel_num)
+  // @@protoc_insertion_point(field_get:dna_info.UserInfo.channel_num)
   return channel_num_;
 }
 void UserInfo::set_channel_num(::google::protobuf::int32 value) {
   
   channel_num_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.channel_num)
+  // @@protoc_insertion_point(field_set:dna_info.UserInfo.channel_num)
 }
 
-// optional int32 session_num = 3;
+// optional int32 session_num = 4;
 void UserInfo::clear_session_num() {
   session_num_ = 0;
 }
 ::google::protobuf::int32 UserInfo::session_num() const {
-  // @@protoc_insertion_point(field_get:UserInfo.session_num)
+  // @@protoc_insertion_point(field_get:dna_info.UserInfo.session_num)
   return session_num_;
 }
 void UserInfo::set_session_num(::google::protobuf::int32 value) {
   
   session_num_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.session_num)
+  // @@protoc_insertion_point(field_set:dna_info.UserInfo.session_num)
 }
 
 inline const UserInfo* UserInfo::internal_default_instance() {
@@ -1277,7 +1645,7 @@ SyncInfo_S_User::SyncInfo_S_User()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
   SharedCtor();
-  // @@protoc_insertion_point(constructor:SyncInfo_S.User)
+  // @@protoc_insertion_point(constructor:dna_info.SyncInfo_S.User)
 }
 
 void SyncInfo_S_User::InitAsDefaultInstance() {
@@ -1288,7 +1656,7 @@ SyncInfo_S_User::SyncInfo_S_User(const SyncInfo_S_User& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   UnsafeMergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:SyncInfo_S.User)
+  // @@protoc_insertion_point(copy_constructor:dna_info.SyncInfo_S.User)
 }
 
 void SyncInfo_S_User::SharedCtor() {
@@ -1298,7 +1666,7 @@ void SyncInfo_S_User::SharedCtor() {
 }
 
 SyncInfo_S_User::~SyncInfo_S_User() {
-  // @@protoc_insertion_point(destructor:SyncInfo_S.User)
+  // @@protoc_insertion_point(destructor:dna_info.SyncInfo_S.User)
   SharedDtor();
 }
 
@@ -1331,7 +1699,7 @@ SyncInfo_S_User* SyncInfo_S_User::New(::google::protobuf::Arena* arena) const {
 }
 
 void SyncInfo_S_User::Clear() {
-// @@protoc_insertion_point(message_clear_start:SyncInfo_S.User)
+// @@protoc_insertion_point(message_clear_start:dna_info.SyncInfo_S.User)
 #if defined(__clang__)
 #define ZR_HELPER_(f) \
   _Pragma("clang diagnostic push") \
@@ -1359,7 +1727,7 @@ bool SyncInfo_S_User::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SyncInfo_S.User)
+  // @@protoc_insertion_point(parse_start:dna_info.SyncInfo_S.User)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1497,17 +1865,17 @@ bool SyncInfo_S_User::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:SyncInfo_S.User)
+  // @@protoc_insertion_point(parse_success:dna_info.SyncInfo_S.User)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:SyncInfo_S.User)
+  // @@protoc_insertion_point(parse_failure:dna_info.SyncInfo_S.User)
   return false;
 #undef DO_
 }
 
 void SyncInfo_S_User::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SyncInfo_S.User)
+  // @@protoc_insertion_point(serialize_start:dna_info.SyncInfo_S.User)
   // optional int32 user_id = 1;
   if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->user_id(), output);
@@ -1548,13 +1916,13 @@ void SyncInfo_S_User::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->c_type_pow(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:SyncInfo_S.User)
+  // @@protoc_insertion_point(serialize_end:dna_info.SyncInfo_S.User)
 }
 
 ::google::protobuf::uint8* SyncInfo_S_User::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:SyncInfo_S.User)
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.SyncInfo_S.User)
   // optional int32 user_id = 1;
   if (this->user_id() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->user_id(), target);
@@ -1595,12 +1963,12 @@ void SyncInfo_S_User::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->c_type_pow(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:SyncInfo_S.User)
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.SyncInfo_S.User)
   return target;
 }
 
 size_t SyncInfo_S_User::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:SyncInfo_S.User)
+// @@protoc_insertion_point(message_byte_size_start:dna_info.SyncInfo_S.User)
   size_t total_size = 0;
 
   // optional int32 user_id = 1;
@@ -1667,22 +2035,22 @@ size_t SyncInfo_S_User::ByteSizeLong() const {
 }
 
 void SyncInfo_S_User::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SyncInfo_S.User)
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.SyncInfo_S.User)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const SyncInfo_S_User* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const SyncInfo_S_User>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SyncInfo_S.User)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.SyncInfo_S.User)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SyncInfo_S.User)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.SyncInfo_S.User)
     UnsafeMergeFrom(*source);
   }
 }
 
 void SyncInfo_S_User::MergeFrom(const SyncInfo_S_User& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SyncInfo_S.User)
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.SyncInfo_S.User)
   if (GOOGLE_PREDICT_TRUE(&from != this)) {
     UnsafeMergeFrom(from);
   } else {
@@ -1719,14 +2087,14 @@ void SyncInfo_S_User::UnsafeMergeFrom(const SyncInfo_S_User& from) {
 }
 
 void SyncInfo_S_User::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SyncInfo_S.User)
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.SyncInfo_S.User)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void SyncInfo_S_User::CopyFrom(const SyncInfo_S_User& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:SyncInfo_S.User)
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.SyncInfo_S.User)
   if (&from == this) return;
   Clear();
   UnsafeMergeFrom(from);
@@ -1773,7 +2141,7 @@ SyncInfo_S::SyncInfo_S()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
   SharedCtor();
-  // @@protoc_insertion_point(constructor:SyncInfo_S)
+  // @@protoc_insertion_point(constructor:dna_info.SyncInfo_S)
 }
 
 void SyncInfo_S::InitAsDefaultInstance() {
@@ -1784,7 +2152,7 @@ SyncInfo_S::SyncInfo_S(const SyncInfo_S& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   UnsafeMergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:SyncInfo_S)
+  // @@protoc_insertion_point(copy_constructor:dna_info.SyncInfo_S)
 }
 
 void SyncInfo_S::SharedCtor() {
@@ -1792,7 +2160,7 @@ void SyncInfo_S::SharedCtor() {
 }
 
 SyncInfo_S::~SyncInfo_S() {
-  // @@protoc_insertion_point(destructor:SyncInfo_S)
+  // @@protoc_insertion_point(destructor:dna_info.SyncInfo_S)
   SharedDtor();
 }
 
@@ -1825,7 +2193,7 @@ SyncInfo_S* SyncInfo_S::New(::google::protobuf::Arena* arena) const {
 }
 
 void SyncInfo_S::Clear() {
-// @@protoc_insertion_point(message_clear_start:SyncInfo_S)
+// @@protoc_insertion_point(message_clear_start:dna_info.SyncInfo_S)
   users_.Clear();
 }
 
@@ -1833,15 +2201,15 @@ bool SyncInfo_S::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SyncInfo_S)
+  // @@protoc_insertion_point(parse_start:dna_info.SyncInfo_S)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .SyncInfo_S.User users = 1;
-      case 1: {
-        if (tag == 10) {
+      // repeated .dna_info.SyncInfo_S.User users = 2;
+      case 2: {
+        if (tag == 18) {
           DO_(input->IncrementRecursionDepth());
          parse_loop_users:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
@@ -1849,7 +2217,7 @@ bool SyncInfo_S::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(10)) goto parse_loop_users;
+        if (input->ExpectTag(18)) goto parse_loop_users;
         input->UnsafeDecrementRecursionDepth();
         if (input->ExpectAtEnd()) goto success;
         break;
@@ -1868,46 +2236,46 @@ bool SyncInfo_S::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:SyncInfo_S)
+  // @@protoc_insertion_point(parse_success:dna_info.SyncInfo_S)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:SyncInfo_S)
+  // @@protoc_insertion_point(parse_failure:dna_info.SyncInfo_S)
   return false;
 #undef DO_
 }
 
 void SyncInfo_S::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SyncInfo_S)
-  // repeated .SyncInfo_S.User users = 1;
+  // @@protoc_insertion_point(serialize_start:dna_info.SyncInfo_S)
+  // repeated .dna_info.SyncInfo_S.User users = 2;
   for (unsigned int i = 0, n = this->users_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->users(i), output);
+      2, this->users(i), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:SyncInfo_S)
+  // @@protoc_insertion_point(serialize_end:dna_info.SyncInfo_S)
 }
 
 ::google::protobuf::uint8* SyncInfo_S::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:SyncInfo_S)
-  // repeated .SyncInfo_S.User users = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.SyncInfo_S)
+  // repeated .dna_info.SyncInfo_S.User users = 2;
   for (unsigned int i = 0, n = this->users_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        1, this->users(i), false, target);
+        2, this->users(i), false, target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:SyncInfo_S)
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.SyncInfo_S)
   return target;
 }
 
 size_t SyncInfo_S::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:SyncInfo_S)
+// @@protoc_insertion_point(message_byte_size_start:dna_info.SyncInfo_S)
   size_t total_size = 0;
 
-  // repeated .SyncInfo_S.User users = 1;
+  // repeated .dna_info.SyncInfo_S.User users = 2;
   {
     unsigned int count = this->users_size();
     total_size += 1UL * count;
@@ -1926,22 +2294,22 @@ size_t SyncInfo_S::ByteSizeLong() const {
 }
 
 void SyncInfo_S::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SyncInfo_S)
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.SyncInfo_S)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const SyncInfo_S* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const SyncInfo_S>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SyncInfo_S)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.SyncInfo_S)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SyncInfo_S)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.SyncInfo_S)
     UnsafeMergeFrom(*source);
   }
 }
 
 void SyncInfo_S::MergeFrom(const SyncInfo_S& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SyncInfo_S)
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.SyncInfo_S)
   if (GOOGLE_PREDICT_TRUE(&from != this)) {
     UnsafeMergeFrom(from);
   } else {
@@ -1955,14 +2323,14 @@ void SyncInfo_S::UnsafeMergeFrom(const SyncInfo_S& from) {
 }
 
 void SyncInfo_S::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SyncInfo_S)
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.SyncInfo_S)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void SyncInfo_S::CopyFrom(const SyncInfo_S& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:SyncInfo_S)
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.SyncInfo_S)
   if (&from == this) return;
   Clear();
   UnsafeMergeFrom(from);
@@ -1999,13 +2367,13 @@ void SyncInfo_S_User::clear_user_id() {
   user_id_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::user_id() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.user_id)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.user_id)
   return user_id_;
 }
 void SyncInfo_S_User::set_user_id(::google::protobuf::int32 value) {
   
   user_id_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.user_id)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.user_id)
 }
 
 // optional int32 x_pos = 2;
@@ -2013,13 +2381,13 @@ void SyncInfo_S_User::clear_x_pos() {
   x_pos_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::x_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.x_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.x_pos)
   return x_pos_;
 }
 void SyncInfo_S_User::set_x_pos(::google::protobuf::int32 value) {
   
   x_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.x_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.x_pos)
 }
 
 // optional int32 y_pos = 3;
@@ -2027,13 +2395,13 @@ void SyncInfo_S_User::clear_y_pos() {
   y_pos_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::y_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.y_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.y_pos)
   return y_pos_;
 }
 void SyncInfo_S_User::set_y_pos(::google::protobuf::int32 value) {
   
   y_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.y_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.y_pos)
 }
 
 // optional int32 vec = 4;
@@ -2041,13 +2409,13 @@ void SyncInfo_S_User::clear_vec() {
   vec_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::vec() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.vec)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.vec)
   return vec_;
 }
 void SyncInfo_S_User::set_vec(::google::protobuf::int32 value) {
   
   vec_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.vec)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.vec)
 }
 
 // optional int32 type = 5;
@@ -2055,13 +2423,13 @@ void SyncInfo_S_User::clear_type() {
   type_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::type() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.type)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.type)
   return type_;
 }
 void SyncInfo_S_User::set_type(::google::protobuf::int32 value) {
   
   type_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.type)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.type)
 }
 
 // optional int32 A_type_pow = 6;
@@ -2069,13 +2437,13 @@ void SyncInfo_S_User::clear_a_type_pow() {
   a_type_pow_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::a_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.A_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.A_type_pow)
   return a_type_pow_;
 }
 void SyncInfo_S_User::set_a_type_pow(::google::protobuf::int32 value) {
   
   a_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.A_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.A_type_pow)
 }
 
 // optional int32 B_type_pow = 7;
@@ -2083,13 +2451,13 @@ void SyncInfo_S_User::clear_b_type_pow() {
   b_type_pow_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::b_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.B_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.B_type_pow)
   return b_type_pow_;
 }
 void SyncInfo_S_User::set_b_type_pow(::google::protobuf::int32 value) {
   
   b_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.B_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.B_type_pow)
 }
 
 // optional int32 C_type_pow = 8;
@@ -2097,13 +2465,13 @@ void SyncInfo_S_User::clear_c_type_pow() {
   c_type_pow_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_S_User::c_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.C_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.C_type_pow)
   return c_type_pow_;
 }
 void SyncInfo_S_User::set_c_type_pow(::google::protobuf::int32 value) {
   
   c_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.C_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.C_type_pow)
 }
 
 inline const SyncInfo_S_User* SyncInfo_S_User::internal_default_instance() {
@@ -2113,33 +2481,33 @@ inline const SyncInfo_S_User* SyncInfo_S_User::internal_default_instance() {
 
 // SyncInfo_S
 
-// repeated .SyncInfo_S.User users = 1;
+// repeated .dna_info.SyncInfo_S.User users = 2;
 int SyncInfo_S::users_size() const {
   return users_.size();
 }
 void SyncInfo_S::clear_users() {
   users_.Clear();
 }
-const ::SyncInfo_S_User& SyncInfo_S::users(int index) const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.users)
+const ::dna_info::SyncInfo_S_User& SyncInfo_S::users(int index) const {
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.users)
   return users_.Get(index);
 }
-::SyncInfo_S_User* SyncInfo_S::mutable_users(int index) {
-  // @@protoc_insertion_point(field_mutable:SyncInfo_S.users)
+::dna_info::SyncInfo_S_User* SyncInfo_S::mutable_users(int index) {
+  // @@protoc_insertion_point(field_mutable:dna_info.SyncInfo_S.users)
   return users_.Mutable(index);
 }
-::SyncInfo_S_User* SyncInfo_S::add_users() {
-  // @@protoc_insertion_point(field_add:SyncInfo_S.users)
+::dna_info::SyncInfo_S_User* SyncInfo_S::add_users() {
+  // @@protoc_insertion_point(field_add:dna_info.SyncInfo_S.users)
   return users_.Add();
 }
-::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User >*
+::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User >*
 SyncInfo_S::mutable_users() {
-  // @@protoc_insertion_point(field_mutable_list:SyncInfo_S.users)
+  // @@protoc_insertion_point(field_mutable_list:dna_info.SyncInfo_S.users)
   return &users_;
 }
-const ::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User >&
+const ::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User >&
 SyncInfo_S::users() const {
-  // @@protoc_insertion_point(field_list:SyncInfo_S.users)
+  // @@protoc_insertion_point(field_list:dna_info.SyncInfo_S.users)
   return users_;
 }
 
@@ -2165,7 +2533,7 @@ SyncInfo_C::SyncInfo_C()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   if (this != internal_default_instance()) protobuf_InitDefaults_protocol_2eproto();
   SharedCtor();
-  // @@protoc_insertion_point(constructor:SyncInfo_C)
+  // @@protoc_insertion_point(constructor:dna_info.SyncInfo_C)
 }
 
 void SyncInfo_C::InitAsDefaultInstance() {
@@ -2176,7 +2544,7 @@ SyncInfo_C::SyncInfo_C(const SyncInfo_C& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   UnsafeMergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:SyncInfo_C)
+  // @@protoc_insertion_point(copy_constructor:dna_info.SyncInfo_C)
 }
 
 void SyncInfo_C::SharedCtor() {
@@ -2186,7 +2554,7 @@ void SyncInfo_C::SharedCtor() {
 }
 
 SyncInfo_C::~SyncInfo_C() {
-  // @@protoc_insertion_point(destructor:SyncInfo_C)
+  // @@protoc_insertion_point(destructor:dna_info.SyncInfo_C)
   SharedDtor();
 }
 
@@ -2219,7 +2587,7 @@ SyncInfo_C* SyncInfo_C::New(::google::protobuf::Arena* arena) const {
 }
 
 void SyncInfo_C::Clear() {
-// @@protoc_insertion_point(message_clear_start:SyncInfo_C)
+// @@protoc_insertion_point(message_clear_start:dna_info.SyncInfo_C)
 #if defined(__clang__)
 #define ZR_HELPER_(f) \
   _Pragma("clang diagnostic push") \
@@ -2247,7 +2615,7 @@ bool SyncInfo_C::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SyncInfo_C)
+  // @@protoc_insertion_point(parse_start:dna_info.SyncInfo_C)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -2385,17 +2753,17 @@ bool SyncInfo_C::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:SyncInfo_C)
+  // @@protoc_insertion_point(parse_success:dna_info.SyncInfo_C)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:SyncInfo_C)
+  // @@protoc_insertion_point(parse_failure:dna_info.SyncInfo_C)
   return false;
 #undef DO_
 }
 
 void SyncInfo_C::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SyncInfo_C)
+  // @@protoc_insertion_point(serialize_start:dna_info.SyncInfo_C)
   // optional int32 user_id = 1;
   if (this->user_id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->user_id(), output);
@@ -2436,13 +2804,13 @@ void SyncInfo_C::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->c_type_pow(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:SyncInfo_C)
+  // @@protoc_insertion_point(serialize_end:dna_info.SyncInfo_C)
 }
 
 ::google::protobuf::uint8* SyncInfo_C::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:SyncInfo_C)
+  // @@protoc_insertion_point(serialize_to_array_start:dna_info.SyncInfo_C)
   // optional int32 user_id = 1;
   if (this->user_id() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->user_id(), target);
@@ -2483,12 +2851,12 @@ void SyncInfo_C::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->c_type_pow(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:SyncInfo_C)
+  // @@protoc_insertion_point(serialize_to_array_end:dna_info.SyncInfo_C)
   return target;
 }
 
 size_t SyncInfo_C::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:SyncInfo_C)
+// @@protoc_insertion_point(message_byte_size_start:dna_info.SyncInfo_C)
   size_t total_size = 0;
 
   // optional int32 user_id = 1;
@@ -2555,22 +2923,22 @@ size_t SyncInfo_C::ByteSizeLong() const {
 }
 
 void SyncInfo_C::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SyncInfo_C)
+// @@protoc_insertion_point(generalized_merge_from_start:dna_info.SyncInfo_C)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const SyncInfo_C* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const SyncInfo_C>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SyncInfo_C)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dna_info.SyncInfo_C)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SyncInfo_C)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dna_info.SyncInfo_C)
     UnsafeMergeFrom(*source);
   }
 }
 
 void SyncInfo_C::MergeFrom(const SyncInfo_C& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SyncInfo_C)
+// @@protoc_insertion_point(class_specific_merge_from_start:dna_info.SyncInfo_C)
   if (GOOGLE_PREDICT_TRUE(&from != this)) {
     UnsafeMergeFrom(from);
   } else {
@@ -2607,14 +2975,14 @@ void SyncInfo_C::UnsafeMergeFrom(const SyncInfo_C& from) {
 }
 
 void SyncInfo_C::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SyncInfo_C)
+// @@protoc_insertion_point(generalized_copy_from_start:dna_info.SyncInfo_C)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void SyncInfo_C::CopyFrom(const SyncInfo_C& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:SyncInfo_C)
+// @@protoc_insertion_point(class_specific_copy_from_start:dna_info.SyncInfo_C)
   if (&from == this) return;
   Clear();
   UnsafeMergeFrom(from);
@@ -2658,13 +3026,13 @@ void SyncInfo_C::clear_user_id() {
   user_id_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::user_id() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.user_id)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.user_id)
   return user_id_;
 }
 void SyncInfo_C::set_user_id(::google::protobuf::int32 value) {
   
   user_id_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.user_id)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.user_id)
 }
 
 // optional int32 x_pos = 2;
@@ -2672,13 +3040,13 @@ void SyncInfo_C::clear_x_pos() {
   x_pos_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::x_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.x_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.x_pos)
   return x_pos_;
 }
 void SyncInfo_C::set_x_pos(::google::protobuf::int32 value) {
   
   x_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.x_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.x_pos)
 }
 
 // optional int32 y_pos = 3;
@@ -2686,13 +3054,13 @@ void SyncInfo_C::clear_y_pos() {
   y_pos_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::y_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.y_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.y_pos)
   return y_pos_;
 }
 void SyncInfo_C::set_y_pos(::google::protobuf::int32 value) {
   
   y_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.y_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.y_pos)
 }
 
 // optional int32 vec = 4;
@@ -2700,13 +3068,13 @@ void SyncInfo_C::clear_vec() {
   vec_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::vec() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.vec)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.vec)
   return vec_;
 }
 void SyncInfo_C::set_vec(::google::protobuf::int32 value) {
   
   vec_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.vec)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.vec)
 }
 
 // optional int32 type = 5;
@@ -2714,13 +3082,13 @@ void SyncInfo_C::clear_type() {
   type_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::type() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.type)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.type)
   return type_;
 }
 void SyncInfo_C::set_type(::google::protobuf::int32 value) {
   
   type_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.type)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.type)
 }
 
 // optional int32 A_type_pow = 6;
@@ -2728,13 +3096,13 @@ void SyncInfo_C::clear_a_type_pow() {
   a_type_pow_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::a_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.A_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.A_type_pow)
   return a_type_pow_;
 }
 void SyncInfo_C::set_a_type_pow(::google::protobuf::int32 value) {
   
   a_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.A_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.A_type_pow)
 }
 
 // optional int32 B_type_pow = 7;
@@ -2742,13 +3110,13 @@ void SyncInfo_C::clear_b_type_pow() {
   b_type_pow_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::b_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.B_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.B_type_pow)
   return b_type_pow_;
 }
 void SyncInfo_C::set_b_type_pow(::google::protobuf::int32 value) {
   
   b_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.B_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.B_type_pow)
 }
 
 // optional int32 C_type_pow = 8;
@@ -2756,13 +3124,13 @@ void SyncInfo_C::clear_c_type_pow() {
   c_type_pow_ = 0;
 }
 ::google::protobuf::int32 SyncInfo_C::c_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.C_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.C_type_pow)
   return c_type_pow_;
 }
 void SyncInfo_C::set_c_type_pow(::google::protobuf::int32 value) {
   
   c_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.C_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.C_type_pow)
 }
 
 inline const SyncInfo_C* SyncInfo_C::internal_default_instance() {
@@ -2771,5 +3139,7 @@ inline const SyncInfo_C* SyncInfo_C::internal_default_instance() {
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace dna_info
 
 // @@protoc_insertion_point(global_scope)

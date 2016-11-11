@@ -26,8 +26,11 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
+
+namespace dna_info {
 
 // Internal implementation detail -- do not call these.
 void protobuf_AddDesc_protocol_2eproto();
@@ -37,14 +40,134 @@ void protobuf_ShutdownFile_protocol_2eproto();
 
 class LoginRequest;
 class LoginResponse;
+class PacketHeader_PB;
 class SyncInfo_C;
 class SyncInfo_S;
 class SyncInfo_S_User;
 class UserInfo;
 
+enum packet_type {
+  LOGIN_REQ = 0,
+  LOGIN_RES = 1,
+  USER_INFO = 2,
+  SYNC_INFO_S = 3,
+  SYNC_INFO_C = 4,
+  CHAT_REQ = 5,
+  CHAT_RES = 6,
+  packet_type_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  packet_type_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool packet_type_IsValid(int value);
+const packet_type packet_type_MIN = LOGIN_REQ;
+const packet_type packet_type_MAX = CHAT_RES;
+const int packet_type_ARRAYSIZE = packet_type_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* packet_type_descriptor();
+inline const ::std::string& packet_type_Name(packet_type value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    packet_type_descriptor(), value);
+}
+inline bool packet_type_Parse(
+    const ::std::string& name, packet_type* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<packet_type>(
+    packet_type_descriptor(), name, value);
+}
 // ===================================================================
 
-class LoginRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:LoginRequest) */ {
+class PacketHeader_PB : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.PacketHeader_PB) */ {
+ public:
+  PacketHeader_PB();
+  virtual ~PacketHeader_PB();
+
+  PacketHeader_PB(const PacketHeader_PB& from);
+
+  inline PacketHeader_PB& operator=(const PacketHeader_PB& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PacketHeader_PB& default_instance();
+
+  static const PacketHeader_PB* internal_default_instance();
+
+  void Swap(PacketHeader_PB* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PacketHeader_PB* New() const { return New(NULL); }
+
+  PacketHeader_PB* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PacketHeader_PB& from);
+  void MergeFrom(const PacketHeader_PB& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PacketHeader_PB* other);
+  void UnsafeMergeFrom(const PacketHeader_PB& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint32 packet_size = 1;
+  void clear_packet_size();
+  static const int kPacketSizeFieldNumber = 1;
+  ::google::protobuf::uint32 packet_size() const;
+  void set_packet_size(::google::protobuf::uint32 value);
+
+  // optional int32 packet_type = 2;
+  void clear_packet_type();
+  static const int kPacketTypeFieldNumber = 2;
+  ::google::protobuf::int32 packet_type() const;
+  void set_packet_type(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:dna_info.PacketHeader_PB)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 packet_size_;
+  ::google::protobuf::int32 packet_type_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_protocol_2eproto_impl();
+  friend void  protobuf_AddDesc_protocol_2eproto_impl();
+  friend void protobuf_AssignDesc_protocol_2eproto();
+  friend void protobuf_ShutdownFile_protocol_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<PacketHeader_PB> PacketHeader_PB_default_instance_;
+
+// -------------------------------------------------------------------
+
+class LoginRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.LoginRequest) */ {
  public:
   LoginRequest();
   virtual ~LoginRequest();
@@ -107,9 +230,9 @@ class LoginRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // optional string id = 1;
+  // optional string id = 2;
   void clear_id();
-  static const int kIdFieldNumber = 1;
+  static const int kIdFieldNumber = 2;
   const ::std::string& id() const;
   void set_id(const ::std::string& value);
   void set_id(const char* value);
@@ -118,9 +241,9 @@ class LoginRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
-  // optional string passwd = 2;
+  // optional string passwd = 3;
   void clear_passwd();
-  static const int kPasswdFieldNumber = 2;
+  static const int kPasswdFieldNumber = 3;
   const ::std::string& passwd() const;
   void set_passwd(const ::std::string& value);
   void set_passwd(const char* value);
@@ -129,7 +252,7 @@ class LoginRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_passwd();
   void set_allocated_passwd(::std::string* passwd);
 
-  // @@protoc_insertion_point(class_scope:LoginRequest)
+  // @@protoc_insertion_point(class_scope:dna_info.LoginRequest)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -147,7 +270,7 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<LoginRequest> LoginRe
 
 // -------------------------------------------------------------------
 
-class LoginResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:LoginResponse) */ {
+class LoginResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.LoginResponse) */ {
  public:
   LoginResponse();
   virtual ~LoginResponse();
@@ -210,13 +333,13 @@ class LoginResponse : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // optional int32 response_code = 1;
+  // optional int32 response_code = 2;
   void clear_response_code();
-  static const int kResponseCodeFieldNumber = 1;
+  static const int kResponseCodeFieldNumber = 2;
   ::google::protobuf::int32 response_code() const;
   void set_response_code(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:LoginResponse)
+  // @@protoc_insertion_point(class_scope:dna_info.LoginResponse)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -233,7 +356,7 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<LoginResponse> LoginR
 
 // -------------------------------------------------------------------
 
-class UserInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserInfo) */ {
+class UserInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.UserInfo) */ {
  public:
   UserInfo();
   virtual ~UserInfo();
@@ -296,25 +419,25 @@ class UserInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // optional int32 identify_id = 1;
+  // optional int32 identify_id = 2;
   void clear_identify_id();
-  static const int kIdentifyIdFieldNumber = 1;
+  static const int kIdentifyIdFieldNumber = 2;
   ::google::protobuf::int32 identify_id() const;
   void set_identify_id(::google::protobuf::int32 value);
 
-  // optional int32 channel_num = 2;
+  // optional int32 channel_num = 3;
   void clear_channel_num();
-  static const int kChannelNumFieldNumber = 2;
+  static const int kChannelNumFieldNumber = 3;
   ::google::protobuf::int32 channel_num() const;
   void set_channel_num(::google::protobuf::int32 value);
 
-  // optional int32 session_num = 3;
+  // optional int32 session_num = 4;
   void clear_session_num();
-  static const int kSessionNumFieldNumber = 3;
+  static const int kSessionNumFieldNumber = 4;
   ::google::protobuf::int32 session_num() const;
   void set_session_num(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:UserInfo)
+  // @@protoc_insertion_point(class_scope:dna_info.UserInfo)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -333,7 +456,7 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<UserInfo> UserInfo_de
 
 // -------------------------------------------------------------------
 
-class SyncInfo_S_User : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:SyncInfo_S.User) */ {
+class SyncInfo_S_User : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.SyncInfo_S.User) */ {
  public:
   SyncInfo_S_User();
   virtual ~SyncInfo_S_User();
@@ -444,7 +567,7 @@ class SyncInfo_S_User : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::int32 c_type_pow() const;
   void set_c_type_pow(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:SyncInfo_S.User)
+  // @@protoc_insertion_point(class_scope:dna_info.SyncInfo_S.User)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -468,7 +591,7 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<SyncInfo_S_User> Sync
 
 // -------------------------------------------------------------------
 
-class SyncInfo_S : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:SyncInfo_S) */ {
+class SyncInfo_S : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.SyncInfo_S) */ {
  public:
   SyncInfo_S();
   virtual ~SyncInfo_S();
@@ -533,23 +656,23 @@ class SyncInfo_S : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // accessors -------------------------------------------------------
 
-  // repeated .SyncInfo_S.User users = 1;
+  // repeated .dna_info.SyncInfo_S.User users = 2;
   int users_size() const;
   void clear_users();
-  static const int kUsersFieldNumber = 1;
-  const ::SyncInfo_S_User& users(int index) const;
-  ::SyncInfo_S_User* mutable_users(int index);
-  ::SyncInfo_S_User* add_users();
-  ::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User >*
+  static const int kUsersFieldNumber = 2;
+  const ::dna_info::SyncInfo_S_User& users(int index) const;
+  ::dna_info::SyncInfo_S_User* mutable_users(int index);
+  ::dna_info::SyncInfo_S_User* add_users();
+  ::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User >*
       mutable_users();
-  const ::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User >&
+  const ::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User >&
       users() const;
 
-  // @@protoc_insertion_point(class_scope:SyncInfo_S)
+  // @@protoc_insertion_point(class_scope:dna_info.SyncInfo_S)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User > users_;
+  ::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User > users_;
   mutable int _cached_size_;
   friend void  protobuf_InitDefaults_protocol_2eproto_impl();
   friend void  protobuf_AddDesc_protocol_2eproto_impl();
@@ -562,7 +685,7 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<SyncInfo_S> SyncInfo_
 
 // -------------------------------------------------------------------
 
-class SyncInfo_C : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:SyncInfo_C) */ {
+class SyncInfo_C : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dna_info.SyncInfo_C) */ {
  public:
   SyncInfo_C();
   virtual ~SyncInfo_C();
@@ -673,7 +796,7 @@ class SyncInfo_C : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 c_type_pow() const;
   void set_c_type_pow(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:SyncInfo_C)
+  // @@protoc_insertion_point(class_scope:dna_info.SyncInfo_C)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -701,39 +824,74 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<SyncInfo_C> SyncInfo_
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
+// PacketHeader_PB
+
+// optional uint32 packet_size = 1;
+inline void PacketHeader_PB::clear_packet_size() {
+  packet_size_ = 0u;
+}
+inline ::google::protobuf::uint32 PacketHeader_PB::packet_size() const {
+  // @@protoc_insertion_point(field_get:dna_info.PacketHeader_PB.packet_size)
+  return packet_size_;
+}
+inline void PacketHeader_PB::set_packet_size(::google::protobuf::uint32 value) {
+  
+  packet_size_ = value;
+  // @@protoc_insertion_point(field_set:dna_info.PacketHeader_PB.packet_size)
+}
+
+// optional int32 packet_type = 2;
+inline void PacketHeader_PB::clear_packet_type() {
+  packet_type_ = 0;
+}
+inline ::google::protobuf::int32 PacketHeader_PB::packet_type() const {
+  // @@protoc_insertion_point(field_get:dna_info.PacketHeader_PB.packet_type)
+  return packet_type_;
+}
+inline void PacketHeader_PB::set_packet_type(::google::protobuf::int32 value) {
+  
+  packet_type_ = value;
+  // @@protoc_insertion_point(field_set:dna_info.PacketHeader_PB.packet_type)
+}
+
+inline const PacketHeader_PB* PacketHeader_PB::internal_default_instance() {
+  return &PacketHeader_PB_default_instance_.get();
+}
+// -------------------------------------------------------------------
+
 // LoginRequest
 
-// optional string id = 1;
+// optional string id = 2;
 inline void LoginRequest::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& LoginRequest::id() const {
-  // @@protoc_insertion_point(field_get:LoginRequest.id)
+  // @@protoc_insertion_point(field_get:dna_info.LoginRequest.id)
   return id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void LoginRequest::set_id(const ::std::string& value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:LoginRequest.id)
+  // @@protoc_insertion_point(field_set:dna_info.LoginRequest.id)
 }
 inline void LoginRequest::set_id(const char* value) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:LoginRequest.id)
+  // @@protoc_insertion_point(field_set_char:dna_info.LoginRequest.id)
 }
 inline void LoginRequest::set_id(const char* value, size_t size) {
   
   id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:LoginRequest.id)
+  // @@protoc_insertion_point(field_set_pointer:dna_info.LoginRequest.id)
 }
 inline ::std::string* LoginRequest::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:LoginRequest.id)
+  // @@protoc_insertion_point(field_mutable:dna_info.LoginRequest.id)
   return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* LoginRequest::release_id() {
-  // @@protoc_insertion_point(field_release:LoginRequest.id)
+  // @@protoc_insertion_point(field_release:dna_info.LoginRequest.id)
   
   return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -744,40 +902,40 @@ inline void LoginRequest::set_allocated_id(::std::string* id) {
     
   }
   id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:LoginRequest.id)
+  // @@protoc_insertion_point(field_set_allocated:dna_info.LoginRequest.id)
 }
 
-// optional string passwd = 2;
+// optional string passwd = 3;
 inline void LoginRequest::clear_passwd() {
   passwd_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& LoginRequest::passwd() const {
-  // @@protoc_insertion_point(field_get:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_get:dna_info.LoginRequest.passwd)
   return passwd_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void LoginRequest::set_passwd(const ::std::string& value) {
   
   passwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set:dna_info.LoginRequest.passwd)
 }
 inline void LoginRequest::set_passwd(const char* value) {
   
   passwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set_char:dna_info.LoginRequest.passwd)
 }
 inline void LoginRequest::set_passwd(const char* value, size_t size) {
   
   passwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set_pointer:dna_info.LoginRequest.passwd)
 }
 inline ::std::string* LoginRequest::mutable_passwd() {
   
-  // @@protoc_insertion_point(field_mutable:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_mutable:dna_info.LoginRequest.passwd)
   return passwd_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* LoginRequest::release_passwd() {
-  // @@protoc_insertion_point(field_release:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_release:dna_info.LoginRequest.passwd)
   
   return passwd_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -788,7 +946,7 @@ inline void LoginRequest::set_allocated_passwd(::std::string* passwd) {
     
   }
   passwd_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), passwd);
-  // @@protoc_insertion_point(field_set_allocated:LoginRequest.passwd)
+  // @@protoc_insertion_point(field_set_allocated:dna_info.LoginRequest.passwd)
 }
 
 inline const LoginRequest* LoginRequest::internal_default_instance() {
@@ -798,18 +956,18 @@ inline const LoginRequest* LoginRequest::internal_default_instance() {
 
 // LoginResponse
 
-// optional int32 response_code = 1;
+// optional int32 response_code = 2;
 inline void LoginResponse::clear_response_code() {
   response_code_ = 0;
 }
 inline ::google::protobuf::int32 LoginResponse::response_code() const {
-  // @@protoc_insertion_point(field_get:LoginResponse.response_code)
+  // @@protoc_insertion_point(field_get:dna_info.LoginResponse.response_code)
   return response_code_;
 }
 inline void LoginResponse::set_response_code(::google::protobuf::int32 value) {
   
   response_code_ = value;
-  // @@protoc_insertion_point(field_set:LoginResponse.response_code)
+  // @@protoc_insertion_point(field_set:dna_info.LoginResponse.response_code)
 }
 
 inline const LoginResponse* LoginResponse::internal_default_instance() {
@@ -819,46 +977,46 @@ inline const LoginResponse* LoginResponse::internal_default_instance() {
 
 // UserInfo
 
-// optional int32 identify_id = 1;
+// optional int32 identify_id = 2;
 inline void UserInfo::clear_identify_id() {
   identify_id_ = 0;
 }
 inline ::google::protobuf::int32 UserInfo::identify_id() const {
-  // @@protoc_insertion_point(field_get:UserInfo.identify_id)
+  // @@protoc_insertion_point(field_get:dna_info.UserInfo.identify_id)
   return identify_id_;
 }
 inline void UserInfo::set_identify_id(::google::protobuf::int32 value) {
   
   identify_id_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.identify_id)
+  // @@protoc_insertion_point(field_set:dna_info.UserInfo.identify_id)
 }
 
-// optional int32 channel_num = 2;
+// optional int32 channel_num = 3;
 inline void UserInfo::clear_channel_num() {
   channel_num_ = 0;
 }
 inline ::google::protobuf::int32 UserInfo::channel_num() const {
-  // @@protoc_insertion_point(field_get:UserInfo.channel_num)
+  // @@protoc_insertion_point(field_get:dna_info.UserInfo.channel_num)
   return channel_num_;
 }
 inline void UserInfo::set_channel_num(::google::protobuf::int32 value) {
   
   channel_num_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.channel_num)
+  // @@protoc_insertion_point(field_set:dna_info.UserInfo.channel_num)
 }
 
-// optional int32 session_num = 3;
+// optional int32 session_num = 4;
 inline void UserInfo::clear_session_num() {
   session_num_ = 0;
 }
 inline ::google::protobuf::int32 UserInfo::session_num() const {
-  // @@protoc_insertion_point(field_get:UserInfo.session_num)
+  // @@protoc_insertion_point(field_get:dna_info.UserInfo.session_num)
   return session_num_;
 }
 inline void UserInfo::set_session_num(::google::protobuf::int32 value) {
   
   session_num_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.session_num)
+  // @@protoc_insertion_point(field_set:dna_info.UserInfo.session_num)
 }
 
 inline const UserInfo* UserInfo::internal_default_instance() {
@@ -873,13 +1031,13 @@ inline void SyncInfo_S_User::clear_user_id() {
   user_id_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::user_id() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.user_id)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.user_id)
   return user_id_;
 }
 inline void SyncInfo_S_User::set_user_id(::google::protobuf::int32 value) {
   
   user_id_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.user_id)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.user_id)
 }
 
 // optional int32 x_pos = 2;
@@ -887,13 +1045,13 @@ inline void SyncInfo_S_User::clear_x_pos() {
   x_pos_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::x_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.x_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.x_pos)
   return x_pos_;
 }
 inline void SyncInfo_S_User::set_x_pos(::google::protobuf::int32 value) {
   
   x_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.x_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.x_pos)
 }
 
 // optional int32 y_pos = 3;
@@ -901,13 +1059,13 @@ inline void SyncInfo_S_User::clear_y_pos() {
   y_pos_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::y_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.y_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.y_pos)
   return y_pos_;
 }
 inline void SyncInfo_S_User::set_y_pos(::google::protobuf::int32 value) {
   
   y_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.y_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.y_pos)
 }
 
 // optional int32 vec = 4;
@@ -915,13 +1073,13 @@ inline void SyncInfo_S_User::clear_vec() {
   vec_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::vec() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.vec)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.vec)
   return vec_;
 }
 inline void SyncInfo_S_User::set_vec(::google::protobuf::int32 value) {
   
   vec_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.vec)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.vec)
 }
 
 // optional int32 type = 5;
@@ -929,13 +1087,13 @@ inline void SyncInfo_S_User::clear_type() {
   type_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::type() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.type)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.type)
   return type_;
 }
 inline void SyncInfo_S_User::set_type(::google::protobuf::int32 value) {
   
   type_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.type)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.type)
 }
 
 // optional int32 A_type_pow = 6;
@@ -943,13 +1101,13 @@ inline void SyncInfo_S_User::clear_a_type_pow() {
   a_type_pow_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::a_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.A_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.A_type_pow)
   return a_type_pow_;
 }
 inline void SyncInfo_S_User::set_a_type_pow(::google::protobuf::int32 value) {
   
   a_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.A_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.A_type_pow)
 }
 
 // optional int32 B_type_pow = 7;
@@ -957,13 +1115,13 @@ inline void SyncInfo_S_User::clear_b_type_pow() {
   b_type_pow_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::b_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.B_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.B_type_pow)
   return b_type_pow_;
 }
 inline void SyncInfo_S_User::set_b_type_pow(::google::protobuf::int32 value) {
   
   b_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.B_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.B_type_pow)
 }
 
 // optional int32 C_type_pow = 8;
@@ -971,13 +1129,13 @@ inline void SyncInfo_S_User::clear_c_type_pow() {
   c_type_pow_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_S_User::c_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.User.C_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.C_type_pow)
   return c_type_pow_;
 }
 inline void SyncInfo_S_User::set_c_type_pow(::google::protobuf::int32 value) {
   
   c_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_S.User.C_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.C_type_pow)
 }
 
 inline const SyncInfo_S_User* SyncInfo_S_User::internal_default_instance() {
@@ -987,33 +1145,33 @@ inline const SyncInfo_S_User* SyncInfo_S_User::internal_default_instance() {
 
 // SyncInfo_S
 
-// repeated .SyncInfo_S.User users = 1;
+// repeated .dna_info.SyncInfo_S.User users = 2;
 inline int SyncInfo_S::users_size() const {
   return users_.size();
 }
 inline void SyncInfo_S::clear_users() {
   users_.Clear();
 }
-inline const ::SyncInfo_S_User& SyncInfo_S::users(int index) const {
-  // @@protoc_insertion_point(field_get:SyncInfo_S.users)
+inline const ::dna_info::SyncInfo_S_User& SyncInfo_S::users(int index) const {
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.users)
   return users_.Get(index);
 }
-inline ::SyncInfo_S_User* SyncInfo_S::mutable_users(int index) {
-  // @@protoc_insertion_point(field_mutable:SyncInfo_S.users)
+inline ::dna_info::SyncInfo_S_User* SyncInfo_S::mutable_users(int index) {
+  // @@protoc_insertion_point(field_mutable:dna_info.SyncInfo_S.users)
   return users_.Mutable(index);
 }
-inline ::SyncInfo_S_User* SyncInfo_S::add_users() {
-  // @@protoc_insertion_point(field_add:SyncInfo_S.users)
+inline ::dna_info::SyncInfo_S_User* SyncInfo_S::add_users() {
+  // @@protoc_insertion_point(field_add:dna_info.SyncInfo_S.users)
   return users_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User >*
+inline ::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User >*
 SyncInfo_S::mutable_users() {
-  // @@protoc_insertion_point(field_mutable_list:SyncInfo_S.users)
+  // @@protoc_insertion_point(field_mutable_list:dna_info.SyncInfo_S.users)
   return &users_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::SyncInfo_S_User >&
+inline const ::google::protobuf::RepeatedPtrField< ::dna_info::SyncInfo_S_User >&
 SyncInfo_S::users() const {
-  // @@protoc_insertion_point(field_list:SyncInfo_S.users)
+  // @@protoc_insertion_point(field_list:dna_info.SyncInfo_S.users)
   return users_;
 }
 
@@ -1029,13 +1187,13 @@ inline void SyncInfo_C::clear_user_id() {
   user_id_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::user_id() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.user_id)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.user_id)
   return user_id_;
 }
 inline void SyncInfo_C::set_user_id(::google::protobuf::int32 value) {
   
   user_id_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.user_id)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.user_id)
 }
 
 // optional int32 x_pos = 2;
@@ -1043,13 +1201,13 @@ inline void SyncInfo_C::clear_x_pos() {
   x_pos_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::x_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.x_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.x_pos)
   return x_pos_;
 }
 inline void SyncInfo_C::set_x_pos(::google::protobuf::int32 value) {
   
   x_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.x_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.x_pos)
 }
 
 // optional int32 y_pos = 3;
@@ -1057,13 +1215,13 @@ inline void SyncInfo_C::clear_y_pos() {
   y_pos_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::y_pos() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.y_pos)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.y_pos)
   return y_pos_;
 }
 inline void SyncInfo_C::set_y_pos(::google::protobuf::int32 value) {
   
   y_pos_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.y_pos)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.y_pos)
 }
 
 // optional int32 vec = 4;
@@ -1071,13 +1229,13 @@ inline void SyncInfo_C::clear_vec() {
   vec_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::vec() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.vec)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.vec)
   return vec_;
 }
 inline void SyncInfo_C::set_vec(::google::protobuf::int32 value) {
   
   vec_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.vec)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.vec)
 }
 
 // optional int32 type = 5;
@@ -1085,13 +1243,13 @@ inline void SyncInfo_C::clear_type() {
   type_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::type() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.type)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.type)
   return type_;
 }
 inline void SyncInfo_C::set_type(::google::protobuf::int32 value) {
   
   type_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.type)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.type)
 }
 
 // optional int32 A_type_pow = 6;
@@ -1099,13 +1257,13 @@ inline void SyncInfo_C::clear_a_type_pow() {
   a_type_pow_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::a_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.A_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.A_type_pow)
   return a_type_pow_;
 }
 inline void SyncInfo_C::set_a_type_pow(::google::protobuf::int32 value) {
   
   a_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.A_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.A_type_pow)
 }
 
 // optional int32 B_type_pow = 7;
@@ -1113,13 +1271,13 @@ inline void SyncInfo_C::clear_b_type_pow() {
   b_type_pow_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::b_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.B_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.B_type_pow)
   return b_type_pow_;
 }
 inline void SyncInfo_C::set_b_type_pow(::google::protobuf::int32 value) {
   
   b_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.B_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.B_type_pow)
 }
 
 // optional int32 C_type_pow = 8;
@@ -1127,13 +1285,13 @@ inline void SyncInfo_C::clear_c_type_pow() {
   c_type_pow_ = 0;
 }
 inline ::google::protobuf::int32 SyncInfo_C::c_type_pow() const {
-  // @@protoc_insertion_point(field_get:SyncInfo_C.C_type_pow)
+  // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.C_type_pow)
   return c_type_pow_;
 }
 inline void SyncInfo_C::set_c_type_pow(::google::protobuf::int32 value) {
   
   c_type_pow_ = value;
-  // @@protoc_insertion_point(field_set:SyncInfo_C.C_type_pow)
+  // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.C_type_pow)
 }
 
 inline const SyncInfo_C* SyncInfo_C::internal_default_instance() {
@@ -1150,8 +1308,26 @@ inline const SyncInfo_C* SyncInfo_C::internal_default_instance() {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace dna_info
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+template <> struct is_proto_enum< ::dna_info::packet_type> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::dna_info::packet_type>() {
+  return ::dna_info::packet_type_descriptor();
+}
+
+}  // namespace protobuf
+}  // namespace google
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 
