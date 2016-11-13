@@ -20,12 +20,13 @@ public:
 
 	void Init();
 
-	void Send_packet(char *packet, size_t size);
+	void Send_packet(const bool b_Immediately, unsigned char *packet, size_t size);
 
 	void Receive_packet();
 
 	boost::asio::ip::tcp::socket& Get_socket() { return m_socket; }
 
+	bool Is_active() const { return m_socket.is_open(); }
 	int Get_session_id() { return session_id; }
 	void Set_name(const std::string name) { user_name = name; }
 	std::string Get_name() { return user_name; }
@@ -44,7 +45,7 @@ private:
 	int m_nPacketBufferMark; // 현재 버퍼에 남아 있는 패킷의 크기
 	google::protobuf::uint8 m_PacketBuffer[MAX_RECEIVE_BUF_LEN * 10]; // 패킷을 담아두는 버퍼
 
-	std::deque<unsigned char *> send_queue; // 전송할 패킷들을 담아둘 큐
+	std::deque<unsigned char *> send_queue; // 전송할 패킷들을 담아둘 큐(header + payload)
 
 	int session_id; // 세션의 id
 	bool isLogined;	// 현재 세션이 로그인 되어 있는 세션인가를 체크함

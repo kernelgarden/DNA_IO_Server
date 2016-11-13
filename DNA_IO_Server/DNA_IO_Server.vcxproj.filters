@@ -33,6 +33,12 @@
     <ClCompile Include="PB_handler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="dummy_client.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Server.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="protocol.pb.h">
@@ -54,6 +60,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PB_handler.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="User_info.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Error_code.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

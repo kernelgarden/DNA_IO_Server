@@ -153,6 +153,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Channel.cpp" />
+    <ClCompile Include="dummy_client.cpp" />
+    <ClCompile Include="Game_Server.cpp" />
     <ClCompile Include="Login_server.cpp" />
     <ClCompile Include="Main_server.cpp" />
     <ClCompile Include="PB_handler.cpp" />
@@ -164,12 +166,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Channel.h" />
+    <ClInclude Include="Error_code.h" />
     <ClInclude Include="Game_server.h" />
     <ClInclude Include="Login_server.h" />
     <ClInclude Include="PB_handler.h" />
     <ClInclude Include="protocol.pb.h" />
     <ClInclude Include="Session.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="User_info.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

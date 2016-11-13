@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
 	boost::asio::io_service io_service;
+	/*
 
 	dna_info::LoginRequest login_req;
 	login_req.set_id("kernelgarden");
@@ -51,6 +52,7 @@ int main(int argc, char **argv)
 	protobuf::io::CodedInputStream input_coded_stream(&input_array_stream);
 
 	Process_packet(input_coded_stream, handler);
+	*/
 
 	GameServer server(io_service);
 
@@ -59,7 +61,7 @@ int main(int argc, char **argv)
 
 	io_service.run();
 
-	delete[]outputBuf;
+	//delete[]outputBuf;
 	google::protobuf::ShutdownProtobufLibrary();
 
 	return 0;
