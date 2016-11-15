@@ -16,7 +16,7 @@ class GameServer
 {
 public:
 	GameServer(boost::asio::io_service& io_service)
-		: packet_handler(this),
+		: packet_handler(this), channel_manager(this),
 		m_acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUM))
 	{
 		m_bIsAccepting = false;
@@ -66,6 +66,14 @@ public:
 		PostAccept();
 	}
 
+	/* 
+	* channel manager에 유저 바인딩을 요청합니다.
+	*/
+	void BindUser(User_info *p_user_info, int p_channel_num)
+	{
+		channel_manager.bind_User(p_user_info, p_channel_num);
+	}
+
 	/*
 	* sessionID에 해당하는 세션을 정리하고 자원을 해제합니다.
 	*/
@@ -94,6 +102,7 @@ public:
 
 	PacketHandler packet_handler; // 패킷을 처리하는 핸들러 클래스
 	LoginServer login_server;  // 로그인 처리를 수행할 서버
+	ChannelBalancer channel_manager; // 채널들을 관리하는 매니지 서버
 
 private:
 	/*
@@ -140,8 +149,6 @@ private:
 				<< error.message() << std::endl;
 		}
 	}
-
-	ChannelBalancer channel_manager; // 채널들을 관리하는 매니지 서버
 
 	std::vector<Session *> session_list;	// 세션 리스트
 	std::deque<int> session_queue;	// 할당 가능한 세션 id를 담고있는 큐

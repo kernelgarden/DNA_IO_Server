@@ -31,15 +31,15 @@ message LoginResponse {
 
 // 채널 서버에서 유저 세션을 생성한 후 클라이언트로 보내주는 패킷이다.
 message UserInfo {
-	int32 identify_id = 2;
-	int32 channel_num = 3;
-	int32 session_num = 4;
+	string identify_id = 2;  // 유저의 이름
+	int32 channel_num = 3;  // 해당 세션이 속한 채널의 번호
+	int32 session_num = 4;  // 세션의 id
 }
 
 // 동기화를 위해 서버에서 유저들의 정보들을 뿌려주기 위해 사용하는 패킷이다.
 message SyncInfo_S {
 	message User {
-		int32 user_id = 1;
+		string user_id = 1;
 		int32 x_pos = 2;
 		int32 y_pos = 3;
 		int32 vec = 4;
@@ -54,7 +54,7 @@ message SyncInfo_S {
 
 // 동기화를 위해 클라이언트에서 서버로 주기적으로 보내주는 패킷이다.
 message SyncInfo_C {
-	int32 user_id = 1;
+	string user_id = 1;
 	int32 x_pos = 2;
 	int32 y_pos = 3;
 	int32 vec = 4;

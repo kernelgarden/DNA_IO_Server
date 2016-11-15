@@ -154,4 +154,52 @@ void PacketHandler::Handle(const dna_info::LoginRequest& message, int p_session_
 
 	/* 유저에게 로그인 response 전송 */
 	m_server->GetSession(p_session_id)->Send_packet(false, packet, size);
+
+	/* 유저가 로그인에 성공했다면 유저를 적절한 채널에 할당하고 채널 정보를 전송해줍니다. */
+	if (res.response_code() == LOGIN_SUCCESFUL)
+	{
+		int channel_num;
+		size_t _size = 0;
+		protobuf::uint8 *_packet;
+		dna_info::UserInfo user_info;
+
+		/* 적절한 채널을 할당 받습니다. */
+		channel_num = m_server->channel_manager.Get_BalancedArrangeNum();
+
+		/* 세션에 유저 정보를 할당합니다. */
+		User_info *user_info_s = new User_info;
+		user_info_s->xpos = 0;
+		user_info_s->ypos = 0;
+		user_info_s->A_type_pow = 0;
+		user_info_s->B_type_pow = 0;
+		user_info_s->C_type_pow = 0;
+		user_info_s->type = MALE;
+		user_info_s->user_id = p_session_id;
+		user_info_s->user_name = message.id();
+		user_info_s->vec = 0;
+		user_info_s->user_socket = &(m_server->GetSession(p_session_id)->Get_socket());
+		m_server->GetSession(p_session_id)->Set_User(user_info_s);
+
+		/* 세션에 채널을 설정합니다. */
+		m_server->GetSession(p_session_id)->Set_Channel(channel_num);
+
+		/* 채널에 유저를 바인딩합니다. */
+		m_server->BindUser(user_info_s, channel_num);
+
+		/* 유저에게 보낼 UserInfo 메시지를 설정합니다. */
+		user_info.set_channel_num(channel_num);
+		user_info.set_session_num(p_session_id);
+		user_info.set_identify_id(message.id());
+
+		_size += sizeof(PacketHeader) + user_info.ByteSize();
+		_packet = new protobuf::uint8[_size];
+
+		protobuf::io::ArrayOutputStream _output_array_stream(_packet, _size);
+		protobuf::io::CodedOutputStream _output_coded_stream(&_output_array_stream);
+
+		WriteMessageToStream(user_info, dna_info::USER_INFO, _output_coded_stream);
+
+		/* 유저에게 UserInfo를 전송합니다. */
+		m_server->GetSession(p_session_id)->Send_packet(false, _packet, _size);
+	}
 }

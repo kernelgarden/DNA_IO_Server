@@ -226,9 +226,12 @@ void protobuf_InitDefaults_protocol_2eproto_impl() {
   ::google::protobuf::internal::GetEmptyString();
   LoginRequest_default_instance_.DefaultConstruct();
   LoginResponse_default_instance_.DefaultConstruct();
+  ::google::protobuf::internal::GetEmptyString();
   UserInfo_default_instance_.DefaultConstruct();
   SyncInfo_S_default_instance_.DefaultConstruct();
+  ::google::protobuf::internal::GetEmptyString();
   SyncInfo_S_User_default_instance_.DefaultConstruct();
+  ::google::protobuf::internal::GetEmptyString();
   SyncInfo_C_default_instance_.DefaultConstruct();
   PacketHeader_PB_default_instance_.get_mutable()->InitAsDefaultInstance();
   LoginRequest_default_instance_.get_mutable()->InitAsDefaultInstance();
@@ -254,13 +257,13 @@ void protobuf_AddDesc_protocol_2eproto_impl() {
     "e\030\002 \001(\005\"*\n\014LoginRequest\022\n\n\002id\030\002 \001(\t\022\016\n\006p"
     "asswd\030\003 \001(\t\"&\n\rLoginResponse\022\025\n\rresponse"
     "_code\030\002 \001(\005\"I\n\010UserInfo\022\023\n\013identify_id\030\002"
-    " \001(\005\022\023\n\013channel_num\030\003 \001(\005\022\023\n\013session_num"
+    " \001(\t\022\023\n\013channel_num\030\003 \001(\005\022\023\n\013session_num"
     "\030\004 \001(\005\"\305\001\n\nSyncInfo_S\022(\n\005users\030\002 \003(\0132\031.d"
     "na_info.SyncInfo_S.User\032\214\001\n\004User\022\017\n\007user"
-    "_id\030\001 \001(\005\022\r\n\005x_pos\030\002 \001(\005\022\r\n\005y_pos\030\003 \001(\005\022"
+    "_id\030\001 \001(\t\022\r\n\005x_pos\030\002 \001(\005\022\r\n\005y_pos\030\003 \001(\005\022"
     "\013\n\003vec\030\004 \001(\005\022\014\n\004type\030\005 \001(\005\022\022\n\nA_type_pow"
     "\030\006 \001(\005\022\022\n\nB_type_pow\030\007 \001(\005\022\022\n\nC_type_pow"
-    "\030\010 \001(\005\"\222\001\n\nSyncInfo_C\022\017\n\007user_id\030\001 \001(\005\022\r"
+    "\030\010 \001(\005\"\222\001\n\nSyncInfo_C\022\017\n\007user_id\030\001 \001(\t\022\r"
     "\n\005x_pos\030\002 \001(\005\022\r\n\005y_pos\030\003 \001(\005\022\013\n\003vec\030\004 \001("
     "\005\022\014\n\004type\030\005 \001(\005\022\022\n\nA_type_pow\030\006 \001(\005\022\022\n\nB"
     "_type_pow\030\007 \001(\005\022\022\n\nC_type_pow\030\010 \001(\005*x\n\013p"
@@ -1288,8 +1291,9 @@ UserInfo::UserInfo(const UserInfo& from)
 }
 
 void UserInfo::SharedCtor() {
-  ::memset(&identify_id_, 0, reinterpret_cast<char*>(&session_num_) -
-    reinterpret_cast<char*>(&identify_id_) + sizeof(session_num_));
+  identify_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&channel_num_, 0, reinterpret_cast<char*>(&session_num_) -
+    reinterpret_cast<char*>(&channel_num_) + sizeof(session_num_));
   _cached_size_ = 0;
 }
 
@@ -1299,6 +1303,7 @@ UserInfo::~UserInfo() {
 }
 
 void UserInfo::SharedDtor() {
+  identify_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void UserInfo::SetCachedSize(int size) const {
@@ -1344,7 +1349,8 @@ void UserInfo::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(identify_id_, session_num_);
+  ZR_(channel_num_, session_num_);
+  identify_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -1361,13 +1367,15 @@ bool UserInfo::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 identify_id = 2;
+      // optional string identify_id = 2;
       case 2: {
-        if (tag == 16) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &identify_id_)));
+        if (tag == 18) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_identify_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->identify_id().data(), this->identify_id().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "dna_info.UserInfo.identify_id"));
         } else {
           goto handle_unusual;
         }
@@ -1429,9 +1437,14 @@ failure:
 void UserInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:dna_info.UserInfo)
-  // optional int32 identify_id = 2;
-  if (this->identify_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->identify_id(), output);
+  // optional string identify_id = 2;
+  if (this->identify_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->identify_id().data(), this->identify_id().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dna_info.UserInfo.identify_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->identify_id(), output);
   }
 
   // optional int32 channel_num = 3;
@@ -1451,9 +1464,15 @@ void UserInfo::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:dna_info.UserInfo)
-  // optional int32 identify_id = 2;
-  if (this->identify_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->identify_id(), target);
+  // optional string identify_id = 2;
+  if (this->identify_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->identify_id().data(), this->identify_id().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dna_info.UserInfo.identify_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->identify_id(), target);
   }
 
   // optional int32 channel_num = 3;
@@ -1474,10 +1493,10 @@ size_t UserInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:dna_info.UserInfo)
   size_t total_size = 0;
 
-  // optional int32 identify_id = 2;
-  if (this->identify_id() != 0) {
+  // optional string identify_id = 2;
+  if (this->identify_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->identify_id());
   }
 
@@ -1528,8 +1547,9 @@ void UserInfo::MergeFrom(const UserInfo& from) {
 
 void UserInfo::UnsafeMergeFrom(const UserInfo& from) {
   GOOGLE_DCHECK(&from != this);
-  if (from.identify_id() != 0) {
-    set_identify_id(from.identify_id());
+  if (from.identify_id().size() > 0) {
+
+    identify_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.identify_id_);
   }
   if (from.channel_num() != 0) {
     set_channel_num(from.channel_num());
@@ -1563,7 +1583,7 @@ void UserInfo::Swap(UserInfo* other) {
   InternalSwap(other);
 }
 void UserInfo::InternalSwap(UserInfo* other) {
-  std::swap(identify_id_, other->identify_id_);
+  identify_id_.Swap(&other->identify_id_);
   std::swap(channel_num_, other->channel_num_);
   std::swap(session_num_, other->session_num_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1581,18 +1601,48 @@ void UserInfo::InternalSwap(UserInfo* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // UserInfo
 
-// optional int32 identify_id = 2;
+// optional string identify_id = 2;
 void UserInfo::clear_identify_id() {
-  identify_id_ = 0;
+  identify_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::google::protobuf::int32 UserInfo::identify_id() const {
+const ::std::string& UserInfo::identify_id() const {
   // @@protoc_insertion_point(field_get:dna_info.UserInfo.identify_id)
-  return identify_id_;
+  return identify_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void UserInfo::set_identify_id(::google::protobuf::int32 value) {
+void UserInfo::set_identify_id(const ::std::string& value) {
   
-  identify_id_ = value;
+  identify_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:dna_info.UserInfo.identify_id)
+}
+void UserInfo::set_identify_id(const char* value) {
+  
+  identify_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:dna_info.UserInfo.identify_id)
+}
+void UserInfo::set_identify_id(const char* value, size_t size) {
+  
+  identify_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:dna_info.UserInfo.identify_id)
+}
+::std::string* UserInfo::mutable_identify_id() {
+  
+  // @@protoc_insertion_point(field_mutable:dna_info.UserInfo.identify_id)
+  return identify_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* UserInfo::release_identify_id() {
+  // @@protoc_insertion_point(field_release:dna_info.UserInfo.identify_id)
+  
+  return identify_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void UserInfo::set_allocated_identify_id(::std::string* identify_id) {
+  if (identify_id != NULL) {
+    
+  } else {
+    
+  }
+  identify_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), identify_id);
+  // @@protoc_insertion_point(field_set_allocated:dna_info.UserInfo.identify_id)
 }
 
 // optional int32 channel_num = 3;
@@ -1660,8 +1710,9 @@ SyncInfo_S_User::SyncInfo_S_User(const SyncInfo_S_User& from)
 }
 
 void SyncInfo_S_User::SharedCtor() {
-  ::memset(&user_id_, 0, reinterpret_cast<char*>(&c_type_pow_) -
-    reinterpret_cast<char*>(&user_id_) + sizeof(c_type_pow_));
+  user_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&x_pos_, 0, reinterpret_cast<char*>(&c_type_pow_) -
+    reinterpret_cast<char*>(&x_pos_) + sizeof(c_type_pow_));
   _cached_size_ = 0;
 }
 
@@ -1671,6 +1722,7 @@ SyncInfo_S_User::~SyncInfo_S_User() {
 }
 
 void SyncInfo_S_User::SharedDtor() {
+  user_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void SyncInfo_S_User::SetCachedSize(int size) const {
@@ -1716,7 +1768,8 @@ void SyncInfo_S_User::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(user_id_, c_type_pow_);
+  ZR_(x_pos_, c_type_pow_);
+  user_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -1733,13 +1786,15 @@ bool SyncInfo_S_User::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 user_id = 1;
+      // optional string user_id = 1;
       case 1: {
-        if (tag == 8) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &user_id_)));
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id().data(), this->user_id().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "dna_info.SyncInfo_S.User.user_id"));
         } else {
           goto handle_unusual;
         }
@@ -1876,9 +1931,14 @@ failure:
 void SyncInfo_S_User::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:dna_info.SyncInfo_S.User)
-  // optional int32 user_id = 1;
-  if (this->user_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->user_id(), output);
+  // optional string user_id = 1;
+  if (this->user_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id().data(), this->user_id().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dna_info.SyncInfo_S.User.user_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->user_id(), output);
   }
 
   // optional int32 x_pos = 2;
@@ -1923,9 +1983,15 @@ void SyncInfo_S_User::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:dna_info.SyncInfo_S.User)
-  // optional int32 user_id = 1;
-  if (this->user_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->user_id(), target);
+  // optional string user_id = 1;
+  if (this->user_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id().data(), this->user_id().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dna_info.SyncInfo_S.User.user_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->user_id(), target);
   }
 
   // optional int32 x_pos = 2;
@@ -1971,10 +2037,10 @@ size_t SyncInfo_S_User::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:dna_info.SyncInfo_S.User)
   size_t total_size = 0;
 
-  // optional int32 user_id = 1;
-  if (this->user_id() != 0) {
+  // optional string user_id = 1;
+  if (this->user_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->user_id());
   }
 
@@ -2060,8 +2126,9 @@ void SyncInfo_S_User::MergeFrom(const SyncInfo_S_User& from) {
 
 void SyncInfo_S_User::UnsafeMergeFrom(const SyncInfo_S_User& from) {
   GOOGLE_DCHECK(&from != this);
-  if (from.user_id() != 0) {
-    set_user_id(from.user_id());
+  if (from.user_id().size() > 0) {
+
+    user_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_);
   }
   if (from.x_pos() != 0) {
     set_x_pos(from.x_pos());
@@ -2110,7 +2177,7 @@ void SyncInfo_S_User::Swap(SyncInfo_S_User* other) {
   InternalSwap(other);
 }
 void SyncInfo_S_User::InternalSwap(SyncInfo_S_User* other) {
-  std::swap(user_id_, other->user_id_);
+  user_id_.Swap(&other->user_id_);
   std::swap(x_pos_, other->x_pos_);
   std::swap(y_pos_, other->y_pos_);
   std::swap(vec_, other->vec_);
@@ -2362,18 +2429,48 @@ void SyncInfo_S::InternalSwap(SyncInfo_S* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // SyncInfo_S_User
 
-// optional int32 user_id = 1;
+// optional string user_id = 1;
 void SyncInfo_S_User::clear_user_id() {
-  user_id_ = 0;
+  user_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::google::protobuf::int32 SyncInfo_S_User::user_id() const {
+const ::std::string& SyncInfo_S_User::user_id() const {
   // @@protoc_insertion_point(field_get:dna_info.SyncInfo_S.User.user_id)
-  return user_id_;
+  return user_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void SyncInfo_S_User::set_user_id(::google::protobuf::int32 value) {
+void SyncInfo_S_User::set_user_id(const ::std::string& value) {
   
-  user_id_ = value;
+  user_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:dna_info.SyncInfo_S.User.user_id)
+}
+void SyncInfo_S_User::set_user_id(const char* value) {
+  
+  user_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:dna_info.SyncInfo_S.User.user_id)
+}
+void SyncInfo_S_User::set_user_id(const char* value, size_t size) {
+  
+  user_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:dna_info.SyncInfo_S.User.user_id)
+}
+::std::string* SyncInfo_S_User::mutable_user_id() {
+  
+  // @@protoc_insertion_point(field_mutable:dna_info.SyncInfo_S.User.user_id)
+  return user_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* SyncInfo_S_User::release_user_id() {
+  // @@protoc_insertion_point(field_release:dna_info.SyncInfo_S.User.user_id)
+  
+  return user_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void SyncInfo_S_User::set_allocated_user_id(::std::string* user_id) {
+  if (user_id != NULL) {
+    
+  } else {
+    
+  }
+  user_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id);
+  // @@protoc_insertion_point(field_set_allocated:dna_info.SyncInfo_S.User.user_id)
 }
 
 // optional int32 x_pos = 2;
@@ -2548,8 +2645,9 @@ SyncInfo_C::SyncInfo_C(const SyncInfo_C& from)
 }
 
 void SyncInfo_C::SharedCtor() {
-  ::memset(&user_id_, 0, reinterpret_cast<char*>(&c_type_pow_) -
-    reinterpret_cast<char*>(&user_id_) + sizeof(c_type_pow_));
+  user_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&x_pos_, 0, reinterpret_cast<char*>(&c_type_pow_) -
+    reinterpret_cast<char*>(&x_pos_) + sizeof(c_type_pow_));
   _cached_size_ = 0;
 }
 
@@ -2559,6 +2657,7 @@ SyncInfo_C::~SyncInfo_C() {
 }
 
 void SyncInfo_C::SharedDtor() {
+  user_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void SyncInfo_C::SetCachedSize(int size) const {
@@ -2604,7 +2703,8 @@ void SyncInfo_C::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(user_id_, c_type_pow_);
+  ZR_(x_pos_, c_type_pow_);
+  user_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -2621,13 +2721,15 @@ bool SyncInfo_C::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 user_id = 1;
+      // optional string user_id = 1;
       case 1: {
-        if (tag == 8) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &user_id_)));
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_id()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->user_id().data(), this->user_id().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "dna_info.SyncInfo_C.user_id"));
         } else {
           goto handle_unusual;
         }
@@ -2764,9 +2866,14 @@ failure:
 void SyncInfo_C::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:dna_info.SyncInfo_C)
-  // optional int32 user_id = 1;
-  if (this->user_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->user_id(), output);
+  // optional string user_id = 1;
+  if (this->user_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id().data(), this->user_id().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dna_info.SyncInfo_C.user_id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->user_id(), output);
   }
 
   // optional int32 x_pos = 2;
@@ -2811,9 +2918,15 @@ void SyncInfo_C::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:dna_info.SyncInfo_C)
-  // optional int32 user_id = 1;
-  if (this->user_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->user_id(), target);
+  // optional string user_id = 1;
+  if (this->user_id().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->user_id().data(), this->user_id().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dna_info.SyncInfo_C.user_id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->user_id(), target);
   }
 
   // optional int32 x_pos = 2;
@@ -2859,10 +2972,10 @@ size_t SyncInfo_C::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:dna_info.SyncInfo_C)
   size_t total_size = 0;
 
-  // optional int32 user_id = 1;
-  if (this->user_id() != 0) {
+  // optional string user_id = 1;
+  if (this->user_id().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::google::protobuf::internal::WireFormatLite::StringSize(
         this->user_id());
   }
 
@@ -2948,8 +3061,9 @@ void SyncInfo_C::MergeFrom(const SyncInfo_C& from) {
 
 void SyncInfo_C::UnsafeMergeFrom(const SyncInfo_C& from) {
   GOOGLE_DCHECK(&from != this);
-  if (from.user_id() != 0) {
-    set_user_id(from.user_id());
+  if (from.user_id().size() > 0) {
+
+    user_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.user_id_);
   }
   if (from.x_pos() != 0) {
     set_x_pos(from.x_pos());
@@ -2998,7 +3112,7 @@ void SyncInfo_C::Swap(SyncInfo_C* other) {
   InternalSwap(other);
 }
 void SyncInfo_C::InternalSwap(SyncInfo_C* other) {
-  std::swap(user_id_, other->user_id_);
+  user_id_.Swap(&other->user_id_);
   std::swap(x_pos_, other->x_pos_);
   std::swap(y_pos_, other->y_pos_);
   std::swap(vec_, other->vec_);
@@ -3021,18 +3135,48 @@ void SyncInfo_C::InternalSwap(SyncInfo_C* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // SyncInfo_C
 
-// optional int32 user_id = 1;
+// optional string user_id = 1;
 void SyncInfo_C::clear_user_id() {
-  user_id_ = 0;
+  user_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::google::protobuf::int32 SyncInfo_C::user_id() const {
+const ::std::string& SyncInfo_C::user_id() const {
   // @@protoc_insertion_point(field_get:dna_info.SyncInfo_C.user_id)
-  return user_id_;
+  return user_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void SyncInfo_C::set_user_id(::google::protobuf::int32 value) {
+void SyncInfo_C::set_user_id(const ::std::string& value) {
   
-  user_id_ = value;
+  user_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:dna_info.SyncInfo_C.user_id)
+}
+void SyncInfo_C::set_user_id(const char* value) {
+  
+  user_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:dna_info.SyncInfo_C.user_id)
+}
+void SyncInfo_C::set_user_id(const char* value, size_t size) {
+  
+  user_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:dna_info.SyncInfo_C.user_id)
+}
+::std::string* SyncInfo_C::mutable_user_id() {
+  
+  // @@protoc_insertion_point(field_mutable:dna_info.SyncInfo_C.user_id)
+  return user_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* SyncInfo_C::release_user_id() {
+  // @@protoc_insertion_point(field_release:dna_info.SyncInfo_C.user_id)
+  
+  return user_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void SyncInfo_C::set_allocated_user_id(::std::string* user_id) {
+  if (user_id != NULL) {
+    
+  } else {
+    
+  }
+  user_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), user_id);
+  // @@protoc_insertion_point(field_set_allocated:dna_info.SyncInfo_C.user_id)
 }
 
 // optional int32 x_pos = 2;

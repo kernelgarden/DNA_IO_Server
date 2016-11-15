@@ -20,6 +20,7 @@ Session::~Session()
 	{
 		delete[] send_queue.front();
 		send_queue.pop_front();
+		send_queue_size.pop_front();
 	}
 }
 
@@ -29,6 +30,23 @@ Session::~Session()
 void Session::Init()
 {
 	m_nPacketBufferMark = 0;
+	// 유저 정보 초기화 필요
+}
+
+/*
+* 해당 세션에 유저 정보를 세팅한다.
+*/
+void Session::Set_User(User_info *p_user_info)
+{
+	info = p_user_info;
+}
+
+/*
+* 해당 세션에 채널을 저장합니다.
+*/
+void Session::Set_Channel(int p_channel_num)
+{
+	channel_num = p_channel_num;
 }
 
 /*
@@ -48,10 +66,12 @@ void Session::Send_packet(const bool b_Immediately, unsigned char *packet, size_
 		delete[] packet;
 
 		send_queue.push_back(SendData);
+		send_queue_size.push_back(size);
 	}
 	else  /* handle write에서 send queue를 비우기 위해 호출한 경우 */
 	{
 		SendData = send_queue.front();
+		size = send_queue_size.front();
 	}
 
 	/* send queue가 쌓여있는 경우 */
@@ -85,10 +105,13 @@ void Session::handle_write(const boost::system::error_code& error,
 	delete[] send_queue.front();
 	send_queue.pop_front();
 
+	int size = send_queue_size.front();
+	send_queue_size.pop_front();
+
 	/* queue에 보내야하는 패킷이 남아있다면 queue를 비우는 작업을 수행한다. */
 	if (send_queue.empty() == false)
 	{
-		Send_packet(true, send_queue.front(), sizeof(send_queue.front()));
+		Send_packet(true, send_queue.front(), size);
 	}
 }
 
