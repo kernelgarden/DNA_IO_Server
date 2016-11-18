@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <boost/asio/steady_timer.hpp>
 
 #include "User_info.h"
 #include "Settings.h"
@@ -29,6 +30,8 @@ public:
 	void Delete_user(std::string user_name); // 해당 이름을 가진 유저를 지우는 루틴
 
 	int Get_user_num() const; // 채널에 있는 유저 수를 리턴하는 루틴
+
+	void Sync_each_user(); // 해당 채널 내에 클라이언트들로 동기 정보를 전송하는 루틴
 
 private:
 
@@ -65,6 +68,8 @@ public:
 
 	void Delete_Channel(int channel_id); // 해당 채널 id를 가진 채널을 종료하는 루틴
 
+	void Sync_Channel(const boost::system::error_code& error,
+		boost::asio::steady_timer *p_timer); // 각 채널에 연결된 유저들에게 동기 정보를 전송합니다.
 private:
 
 	GameServer *m_game_server;  // 게임 서버

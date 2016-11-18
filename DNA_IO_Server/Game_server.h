@@ -5,6 +5,9 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <chrono>
+#include <boost/bind.hpp>
+#include <boost/asio/steady_timer.hpp>
 
 #include "protocol.pb.h"
 #include "Login_server.h"
@@ -16,7 +19,7 @@ class GameServer
 {
 public:
 	GameServer(boost::asio::io_service& io_service)
-		: packet_handler(this), channel_manager(this),
+		: packet_handler(this), channel_manager(this), m_timer(io_service),
 		m_acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUM))
 	{
 		m_bIsAccepting = false;
@@ -63,7 +66,18 @@ public:
 	{
 		std::cout << "game server is running..." << std::endl;
 
-		PostAccept();
+		PostAccept(); // 클라이언트 accept를 시작합니다.
+		StartSync(); // 클라이언트들과 sync를 시작합니다.
+	}
+
+	/*
+	* 서버와 연결된 유저들에서 동기화 정보들을 전송해줍니다.
+	*/
+	void StartSync()
+	{
+		m_timer.expires_from_now(std::chrono::milliseconds(500));
+		m_timer.async_wait(boost::bind(&ChannelBalancer::Sync_Channel, &channel_manager,
+			boost::asio::placeholders::error, &m_timer));
 	}
 
 	/* 
@@ -154,6 +168,8 @@ private:
 	std::deque<int> session_queue;	// 할당 가능한 세션 id를 담고있는 큐
 
 	bool m_bIsAccepting; // 서버가 현재 accept를 수행하고 있는지에 대한 정보
+
+	boost::asio::steady_timer m_timer; // 비동기 타이머
 
 	boost::asio::ip::tcp::acceptor m_acceptor; // 게임서버의 acceptor
 };

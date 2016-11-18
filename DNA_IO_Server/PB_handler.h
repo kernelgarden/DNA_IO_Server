@@ -51,25 +51,28 @@ public:
 	}
 	*/
 
+	/*
 	void Handle(const dna_info::LoginResponse& message) const
 	{
 		PrintMessage(message);
 	}
+	*/
 
-	void Handle(const dna_info::SyncInfo_C& message) const
-	{
-		PrintMessage(message);
-	}
+	void Handle(const dna_info::SyncInfo_C& message, int p_session_id) const;
 
+	/*
 	void Handle(const dna_info::SyncInfo_S& message) const
 	{
 		PrintMessage(message);
 	}
+	*/
 	 
+	/*
 	void Handle(const dna_info::UserInfo& message) const
 	{
 		PrintMessage(message);
 	}
+	*/
 
 protected:
 	/*

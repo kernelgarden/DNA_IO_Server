@@ -28,10 +28,17 @@ public:
 	void Set_User(User_info *p_user_info);
 
 	void Set_Channel(int p_channel_num);
+	
+	bool Is_Logined() const { return isLogined; }
+
+	void Set_Login() { isLogined = true; }
+
+	void Update_User(const dna_info::SyncInfo_C& message);
 
 	boost::asio::ip::tcp::socket& Get_socket() { return m_socket; }
 
 	bool Is_active() const { return m_socket.is_open(); }
+
 	int Get_session_id() { return session_id; }
 	void Set_name(const std::string name) { info->user_name = name; }
 	std::string Get_name() { return info->user_name; }

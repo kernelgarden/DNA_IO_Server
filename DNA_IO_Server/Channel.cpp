@@ -61,6 +61,43 @@ int Channel::Get_user_num() const
 	return m_nUserNum;
 }
 
+void Channel::Sync_each_user()
+{
+	size_t size = 0;
+	protobuf::uint8 *packet;
+	dna_info::SyncInfo_S users_sync_info;
+
+	/* 해당 채널의 유저들의 데이터들을 뽑아서 메세지화한다. */
+	for (std::map<std::string, User_info *>::iterator it = m_UserInfo.begin();
+		it != m_UserInfo.end(); ++it)
+	{
+		dna_info::SyncInfo_S_User *user_sync_info = users_sync_info.add_users();
+
+		user_sync_info->set_user_id(it->second->user_name);
+		user_sync_info->set_a_type_pow(it->second->A_type_pow);
+		user_sync_info->set_b_type_pow(it->second->B_type_pow);
+		user_sync_info->set_c_type_pow(it->second->C_type_pow);
+		user_sync_info->set_x_pos(it->second->xpos);
+		user_sync_info->set_y_pos(it->second->ypos);
+		user_sync_info->set_vec(it->second->vec);
+	}
+
+	size += sizeof(PacketHeader) + users_sync_info.ByteSize();
+	packet = new protobuf::uint8[size];
+
+	protobuf::io::ArrayOutputStream output_array_stream(packet, size);
+	protobuf::io::CodedOutputStream output_coded_stream(&output_array_stream);
+
+	WriteMessageToStream(users_sync_info, dna_info::SYNC_INFO_S, output_coded_stream);
+
+	/* 채널 내 모든 유저들에게 데이터를 전송한다. */
+	for (std::map<std::string, User_info *>::iterator it = m_UserInfo.begin();
+		it != m_UserInfo.end(); ++it)
+	{
+		m_game_server->GetSession(it->second->user_id)->Send_packet(false, packet, size);
+	}
+}
+
 ChannelBalancer::ChannelBalancer(GameServer *p_game_server)
 	: m_game_server(p_game_server), m_ChannelNum(0), m_Channel_count(0)
 {
@@ -161,4 +198,16 @@ void ChannelBalancer::Delete_Channel(int channel_num)
 	delete[] m_Channel_list[channel_num];
 	m_Channel_list.erase(channel_num);
 	m_ChannelNum--;
+}
+
+void ChannelBalancer::Sync_Channel(const boost::system::error_code& error,
+	boost::asio::steady_timer *p_timer)
+{
+	for (std::map<int, Channel *>::iterator it = m_Channel_list.begin();
+		it != m_Channel_list.end(); ++it)
+	{
+		it->second->Sync_each_user();
+	}
+
+	m_game_server->StartSync();
 }

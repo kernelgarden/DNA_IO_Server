@@ -7,7 +7,8 @@
 * 세션에 대한 초기화를 수행한다.
 */
 Session::Session(int Session_id, boost::asio::io_service& io_service, GameServer *server)
-	: session_id(Session_id), m_socket(io_service), game_server(server)
+	: session_id(Session_id), m_socket(io_service), game_server(server),
+	isLogined(false), channel_num(-1), info(nullptr)
 {
 }
 
@@ -31,6 +32,10 @@ void Session::Init()
 {
 	m_nPacketBufferMark = 0;
 	// 유저 정보 초기화 필요
+
+	info = nullptr;
+	channel_num = 0;
+	isLogined = false;
 }
 
 /*
@@ -39,6 +44,21 @@ void Session::Init()
 void Session::Set_User(User_info *p_user_info)
 {
 	info = p_user_info;
+}
+
+/*
+* 해당 유저의 정보를 업데이트한다.
+*/
+void Session::Update_User(const dna_info::SyncInfo_C& message)
+{
+	info->user_name = message.user_id();
+	info->xpos = message.x_pos();
+	info->ypos = message.y_pos();
+	info->vec = message.vec();
+	info->type = message.type();
+	info->A_type_pow = message.a_type_pow();
+	info->B_type_pow = message.b_type_pow();
+	info->C_type_pow = message.c_type_pow();
 }
 
 /*
@@ -111,7 +131,7 @@ void Session::handle_write(const boost::system::error_code& error,
 	/* queue에 보내야하는 패킷이 남아있다면 queue를 비우는 작업을 수행한다. */
 	if (send_queue.empty() == false)
 	{
-		Send_packet(true, send_queue.front(), size);
+		Send_packet(true, send_queue.front(), send_queue_size.front());
 	}
 }
 

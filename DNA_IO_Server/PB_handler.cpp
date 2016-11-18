@@ -40,6 +40,7 @@ int Process_packet(protobuf::io::CodedInputStream& input_stream, const PacketHan
 			handler.Handle(message, p_session_id);
 		}
 		break;
+		/*
 		case dna_info::LOGIN_RES:
 		{
 			dna_info::LoginResponse message;
@@ -51,7 +52,6 @@ int Process_packet(protobuf::io::CodedInputStream& input_stream, const PacketHan
 			handler.Handle(message);
 		}
 		break;
-		/*
 		case dna_info::USER_INFO:
 		{
 			dna_info::UserInfo message;
@@ -72,7 +72,7 @@ int Process_packet(protobuf::io::CodedInputStream& input_stream, const PacketHan
 				std::cerr << "[Error] parse error" << std::endl;
 				break;
 			}
-			handler.Handle(message);
+			handler.Handle(message, p_session_id);
 		}
 		break;
 		/*
@@ -201,5 +201,17 @@ void PacketHandler::Handle(const dna_info::LoginRequest& message, int p_session_
 
 		/* 유저에게 UserInfo를 전송합니다. */
 		m_server->GetSession(p_session_id)->Send_packet(false, _packet, _size);
+
+		/* 해당 세션을 로그인 되어있는 세션으로 설정합니다. */
+		m_server->GetSession(p_session_id)->Set_Login();
 	}
+}
+
+/* 유저의 주기적인 sync 정보를 받아 처리하는 핸들러 */
+void PacketHandler::Handle(const dna_info::SyncInfo_C& message, int p_session_id) const
+{
+	std::cout << "클라인트와 동기에 성공했습니다." << std::endl;
+
+	/* 받아온 정보로 유저의 정보를 업데이트 합니다. */
+	m_server->GetSession(p_session_id)->Update_User(message);
 }
