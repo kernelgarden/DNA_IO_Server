@@ -69,6 +69,14 @@ void Session::Set_Channel(int p_channel_num)
 	channel_num = p_channel_num;
 }
 
+/* 해당 세션을 청소합니다. */
+void Session::Clear_session()
+{
+	isLogined = false;
+	channel_num = -1;
+	delete info;
+}
+
 /*
 * 세션에 연결된 클라이언트로 패킷을 전송한다.
 */
@@ -83,7 +91,46 @@ void Session::Send_packet(const bool b_Immediately, unsigned char *packet, size_
 	{
 		SendData = new unsigned char[size];
 		memcpy(SendData, packet, size);
-		delete[] packet;
+		delete[] packet;// todo
+
+		send_queue.push_back(SendData);
+		send_queue_size.push_back(size);
+	}
+	else  /* handle write에서 send queue를 비우기 위해 호출한 경우 */
+	{
+		SendData = send_queue.front();
+		size = send_queue_size.front();
+	}
+
+	/* send queue가 쌓여있는 경우 */
+	if (b_Immediately == false && send_queue.size() > 1)
+		return;
+
+	/* 소켓에 비동기 쓰기를 수행한다. */
+	boost::asio::async_write(m_socket, boost::asio::buffer(SendData, size),
+		boost::bind(&Session::handle_write, this,
+			boost::asio::placeholders::error,
+			boost::asio::placeholders::bytes_transferred)
+	);
+}
+
+/*
+* 세션에 연결된 클라인언트로 패킷을 전송한다.
+* auto_deletion이 false인경우 전달받은 packet의 메모리를 해제하지 않는다.
+*/
+void Session::Send_packet(const bool b_Immediately, unsigned char *packet, size_t size, bool auto_deletion)
+{
+	unsigned char *SendData = nullptr;
+
+	/* 데이터를 다 전송할 때까지 버퍼에 담아둔다. */
+
+	/* 데이터큐가 쌓여 있는경우 */
+	if (b_Immediately == false)
+	{
+		SendData = new unsigned char[size];
+		memcpy(SendData, packet, size);
+		if (auto_deletion == true)
+			delete[] packet;
 
 		send_queue.push_back(SendData);
 		send_queue_size.push_back(size);

@@ -23,11 +23,17 @@ public:
 
 	void Send_packet(const bool b_Immediately, unsigned char *packet, size_t size);
 
+	void Send_packet(const bool b_Immediately, unsigned char *packet, size_t size, bool auto_deletion);
+
 	void Receive_packet();
+
+	void Clear_session();
 
 	void Set_User(User_info *p_user_info);
 
 	void Set_Channel(int p_channel_num);
+	
+	int Get_Channel() const { return channel_num; }
 	
 	bool Is_Logined() const { return isLogined; }
 

@@ -12,7 +12,7 @@ enum packet_type {
 	CHAT_RES = 6;
 }
 
-// 패킷들을 구분할 수 있는 헤더
+// 패킷들을 구분할 수 있는 헤더 deprecated
 message PacketHeader_PB {
 	uint32 packet_size = 1;
 	int32 packet_type = 2;
@@ -62,4 +62,24 @@ message SyncInfo_C {
 	int32 A_type_pow = 6;
 	int32 B_type_pow = 7;
 	int32 C_type_pow = 8; 
+}
+
+// 다른 개체를 공격하기 위해서 클라이언트에서 서버로 보내주는 패킷이다.
+message Attack {
+	int32 identify_id = 1; // 공격당하는 개체의 id 
+}
+
+// 공격이 발생한것을 모든 클라이언트들에게 통지해주기 위해 보내주는 패킷이다.
+message AttackNotify {
+	int32 attacker_id = 1; // 공격한 사람의 id
+	int32 attaced_id = 2;  // 공격 당한 사람의 id
+	int32 damage = 3;	   // 데미지
+}
+
+// 이동을 하겠다는 커맨드를 서버로 전송하는 패킷이다.
+// 절대 좌표계를 사용한다.
+message MoveAt {
+	int32 pos_X = 1;
+	int32 pos_Y = 2;
+	int32 vec = 3;
 }

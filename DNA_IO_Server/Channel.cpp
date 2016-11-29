@@ -51,7 +51,6 @@ void Channel::Set_user(User_info *user)
 void Channel::Delete_user(std::string user_name)
 {
 	/* 해당 유저의 정보를 삭제하고 자원을 반환한다. */
-	delete[] m_UserInfo[user_name];
 	m_UserInfo.erase(user_name);
 	m_nUserNum--;
 }
@@ -94,7 +93,7 @@ void Channel::Sync_each_user()
 	for (std::map<std::string, User_info *>::iterator it = m_UserInfo.begin();
 		it != m_UserInfo.end(); ++it)
 	{
-		m_game_server->GetSession(it->second->user_id)->Send_packet(false, packet, size);
+		m_game_server->GetSession(it->second->user_id)->Send_packet(false, packet, size, false);
 	}
 }
 
@@ -183,6 +182,11 @@ void ChannelBalancer::Optimize_Channel()
 void ChannelBalancer::bind_User(User_info *p_user_info, int p_channel_num)
 {
 	m_Channel_list[p_channel_num]->Set_user(p_user_info);
+}
+
+void ChannelBalancer::unbind_User(std::string p_user_name, int p_channel_num)
+{
+	m_Channel_list[p_channel_num]->Delete_user(p_user_name);
 }
 
 void ChannelBalancer::Create_Channel()

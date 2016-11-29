@@ -95,6 +95,9 @@ public:
 	{
 		std::cout << "[Close Session] session_id: " << sessionID << std::endl;
 
+		channel_manager.unbind_User(session_list[sessionID]->Get_name(), 
+			session_list[sessionID]->Get_Channel());
+		session_list[sessionID]->Clear_session();
 		session_list[sessionID]->Get_socket().close();
 		session_queue.push_back(sessionID);
 

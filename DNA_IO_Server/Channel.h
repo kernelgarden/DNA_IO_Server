@@ -64,6 +64,8 @@ public:
 
 	void bind_User(User_info *p_user_info, int p_channel_num); // 해당 채널에 세션을 바인딩합니다.
 
+	void unbind_User(std::string p_user_name, int p_channel_num); // 해당 이름을 가진 세션을 언바인딩합니다.
+
 	void Create_Channel(); // 새로운 채널을 생성하는 루틴
 
 	void Delete_Channel(int channel_id); // 해당 채널 id를 가진 채널을 종료하는 루틴
